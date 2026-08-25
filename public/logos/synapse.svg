@@ -1,0 +1,12 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="18" cy="8" r="4" fill="url(#paint0_linear_synapse)"/>
+<circle cx="7" cy="26" r="4" fill="url(#paint0_linear_synapse)"/>
+<circle cx="29" cy="26" r="4" fill="url(#paint0_linear_synapse)"/>
+<path d="M18 12L7 22M18 12L29 22M7 26H29" stroke="url(#paint0_linear_synapse)" stroke-width="2" stroke-linecap="round"/>
+<defs>
+<linearGradient id="paint0_linear_synapse" x1="7" y1="4" x2="29" y2="30" gradientUnits="userSpaceOnUse">
+<stop stop-color="#60A5FA"/>
+<stop offset="1" stop-color="#3B82F6"/>
+</linearGradient>
+</defs>
+</svg>

@@ -8,35 +8,19 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: 'Driwwwle',
+    title: 'Synapse',
     description:
-      'Discover creative websites and developers. A portal for you to share your projects.',
-    logo: '/logos/driwwwle.svg',
-    link: 'https://github.com/itsnitinr/driwwwle',
-    slug: 'driwwwle',
+      'A collaborative study platform combining shared notes with private, AI-powered revision tools like summaries, flashcards, quizzes, and an AI study assistant.',
+    logo: '/logos/synapse.svg',
+    link: 'https://github.com/Yanliangchan',
+    slug: 'synapse',
   },
   {
-    title: 'VSCode Portfolio',
+    title: 'Hookline',
     description:
-      'A Visual Studio Code themed developer portfolio built with Next.js and CSS Modules.',
-    logo: '/logos/vsc.svg',
-    link: 'https://github.com/itsnitinr/vscode-portfolio',
-    slug: 'vscode-portfolio',
-  },
-  {
-    title: 'Subtrackt',
-    description:
-      'A simple and elegant way to track your subscriptions and save money.',
-    logo: '/logos/subtrackt.svg',
-    link: 'https://github.com/itsnitinr/subtrackt',
-    slug: 'subtrackt',
-  },
-  {
-    title: 'Coolify Deployments',
-    description:
-      'VSCode extension to track and deploy your Coolify applications.',
-    logo: '/logos/coolify.svg',
-    link: 'https://github.com/itsnitinr/coolify-vscode-extension',
-    slug: 'coolify-vscode-extension',
+      'A gamified phishing simulator that tests and improves your ability to spot malicious emails through an inbox-based investigation game.',
+    logo: '/logos/hookline.svg',
+    link: 'https://github.com/Yanliangchan',
+    slug: 'hookline',
   },
 ];

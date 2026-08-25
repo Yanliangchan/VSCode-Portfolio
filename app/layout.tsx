@@ -7,28 +7,28 @@ import '@/styles/themes.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Nitin Ranganath | Portfolio',
-    template: 'Nitin Ranganath | %s',
+    default: 'Chan Yanliang | Portfolio',
+    template: 'Chan Yanliang | %s',
   },
   description:
-    "Nitin Ranganath is an avid full stack web developer building websites and applications you'd love to use",
+    'Chan Yanliang is a cybersecurity professional from Singapore working across offensive security, defensive security, software development, automation, and AI',
   keywords: [
-    'nitin ranganath',
-    'nitin',
-    'ranganath',
-    'web developer portfolio',
-    'nitin web developer',
-    'nitin developer',
-    'mern stack',
-    'nitin ranganath portfolio',
+    'chan yanliang',
+    'yanliang',
+    'yanliang chan',
+    'cybersecurity portfolio',
+    'yanliang cybersecurity',
+    'yanliang developer',
+    'digital forensics',
+    'chan yanliang portfolio',
     'vscode-portfolio',
   ],
   openGraph: {
-    title: "Nitin Ranganath's Portfolio",
+    title: "Chan Yanliang's Portfolio",
     description:
-      "A full-stack developer building websites that you'd like to use.",
+      'A cybersecurity professional working across offensive security, defensive security, software development, automation, and AI.',
     images: ['https://imgur.com/4zi5KkQ.png'],
-    url: 'https://vscode-portfolio.vercel.app',
+    url: 'https://yanliangchan.com',
   },
   twitter: {
     card: 'summary_large_image',

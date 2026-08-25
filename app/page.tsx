@@ -19,16 +19,16 @@ export default function HomePage() {
           <div className={styles.intro}>
             <p className={styles.greeting}>Hello, I&apos;m</p>
             
-            <h1 className={styles.name}>Nitin Ranganath</h1>
-            
-            <p className={styles.role}>Full Stack Developer</p>
-            
+            <h1 className={styles.name}>Chan Yanliang</h1>
+
+            <p className={styles.role}>Cybersecurity Professional</p>
+
             <div className={styles.divider} />
-            
+
             <p className={styles.description}>
-              I craft clean, performant web applications with modern technologies. 
-              Specialized in TypeScript, React, Node.js, and building products 
-              that users love.
+              Officer with the Ministry of Defence, Singapore. My interests span
+              offensive security, defensive security, software development,
+              automation, and artificial intelligence.
             </p>
           </div>
 
@@ -45,7 +45,7 @@ export default function HomePage() {
 
           <div className={styles.links}>
             <a 
-              href="https://github.com/itsnitinr" 
+              href="https://github.com/Yanliangchan"
               target="_blank" 
               rel="noopener noreferrer"
               className={styles.link}

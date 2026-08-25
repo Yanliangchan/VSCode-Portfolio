@@ -14,20 +14,22 @@ export const metadata: Metadata = {
 
 export const revalidate = 600;
 
-async function getGithubData() {
-  const userRes = await fetch(
-    `https://api.github.com/users/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}`
-  );
+async function getGithubData(): Promise<{ user: User; repos: Repo[] } | null> {
+  const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME;
+
+  const userRes = await fetch(`https://api.github.com/users/${username}`);
   if (!userRes.ok) {
-    throw new Error(`Failed to fetch user: ${userRes.status}`);
+    console.error(`Failed to fetch user: ${userRes.status}`);
+    return null;
   }
   const user: User = await userRes.json();
 
   const repoRes = await fetch(
-    `https://api.github.com/users/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}/repos?sort=pushed&per_page=6`
+    `https://api.github.com/users/${username}/repos?sort=pushed&per_page=6`
   );
   if (!repoRes.ok) {
-    throw new Error(`Failed to fetch repos: ${repoRes.status}`);
+    console.error(`Failed to fetch repos: ${repoRes.status}`);
+    return null;
   }
   const repos: Repo[] = await repoRes.json();
 
@@ -35,7 +37,19 @@ async function getGithubData() {
 }
 
 export default async function GithubPage() {
-  const { user, repos } = await getGithubData();
+  const data = await getGithubData();
+
+  if (!data) {
+    return (
+      <div className={styles.page}>
+        <div className={styles.container}>
+          <p>Unable to load GitHub data right now. Please try again later.</p>
+        </div>
+      </div>
+    );
+  }
+
+  const { user, repos } = data;
 
   return (
     <div className={styles.page}>

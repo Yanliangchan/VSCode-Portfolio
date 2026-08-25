@@ -45,3 +45,8 @@ export const THEMES: ThemeInfo[] = [
 ];
 
 export const THEME_KEYS = THEMES.map(t => t.theme) as [string, ...string[]];
+
+// Not listed in THEMES on purpose — these themes are intentionally hidden
+// from Settings and the Command Palette, only reachable via the terminal's
+// `theme <name>` command or the Konami code.
+export const HIDDEN_THEME_KEYS = ['hacker-green'] as const;

@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { VscTerminal, VscClose } from 'react-icons/vsc';
 
-import { THEME_KEYS } from '@/lib/themes';
+import { THEME_KEYS, HIDDEN_THEME_KEYS } from '@/lib/themes';
 import styles from '@/styles/Terminal.module.css';
 
 interface TerminalLine {
@@ -64,6 +64,27 @@ const commands: Record<string, () => string[]> = {
   whoami: () => ['visitor@portfolio ~ exploring awesome projects'],
   ls: () => ['about/', 'projects/', 'skills/', 'contact/', 'README.md'],
   pwd: () => ['/home/visitor/portfolio'],
+  sudo: () => ['Permission denied: nice try 😉'],
+  vim: () => [
+    'Entering Vim...',
+    ':wq',
+    ':q!',
+    'ESC :q!',
+    'Just kidding — you can\'t leave. (Type "exit" to actually leave.)',
+  ],
+  exit: () => ["You can't leave. This is a permanent commitment now."],
+  sl: () => [
+    '      ====        ________                ___________',
+    '  _D _|  |_______/        \\__I_I_____===__|_________|',
+    '   |(_)---  |   H\\________/ |   |        =|___ ___|',
+    '   /     |  |   H  |  |     |   |         ||_| |_||',
+    '  |      |  |   H  |__--------------------| [___] |',
+    '  | ________|___H__/__|_____/[][]~\\_______|       |',
+    '  |/ |   |-----------I_____I [][] []  D   |=======|__',
+    '__/ =| o |=-~~\\  /~~\\  /~~\\  /~~\\ ____Y___________|__|',
+    ' |/-=|___|=    ||    ||    ||    |_____/~\\___/',
+    '  \\_/      \\_/   \\_/   \\_/    \\_/     \\_/',
+  ],
 };
 
 const processCommand = (input: string): TerminalLine[] => {
@@ -83,7 +104,7 @@ const processCommand = (input: string): TerminalLine[] => {
   }
 
   if (cmd === 'theme' && args[0]) {
-    if ((THEME_KEYS as string[]).includes(args[0])) {
+    if ((THEME_KEYS as string[]).includes(args[0]) || (HIDDEN_THEME_KEYS as readonly string[]).includes(args[0])) {
       document.documentElement.setAttribute('data-theme', args[0]);
       localStorage.setItem('theme', args[0]);
       lines.push({ type: 'output', content: `Theme changed to ${args[0]}` });
@@ -98,8 +119,28 @@ const processCommand = (input: string): TerminalLine[] => {
     return lines;
   }
 
+  if (cmd === 'matrix') {
+    window.dispatchEvent(new CustomEvent('toggle-matrix-rain'));
+    lines.push({ type: 'output', content: 'Wake up, Yanliang...' });
+    return lines;
+  }
+
   if (cmd === 'echo') {
     lines.push({ type: 'output', content: args.join(' ') });
+    return lines;
+  }
+
+  if (cmd === 'cat') {
+    const filename = args[0];
+    if (!filename) {
+      lines.push({ type: 'error', content: 'Usage: cat <file>' });
+    } else if (filename === 'flag.txt') {
+      lines.push({ type: 'output', content: 'flag{welcome_to_yanliangs_terminal}' });
+      lines.push({ type: 'output', content: '' });
+      lines.push({ type: 'output', content: 'nice work finding this. see you in the CTF scene.' });
+    } else {
+      lines.push({ type: 'error', content: `cat: ${filename}: No such file or directory` });
+    }
     return lines;
   }
 
@@ -115,6 +156,17 @@ const processCommand = (input: string): TerminalLine[] => {
   return lines;
 };
 
+const SCAN_LINES = [
+  '',
+  'Starting scan...',
+  'Scanning ports 1-1000...',
+  '22/tcp   open   ssh',
+  '443/tcp  open   https',
+  '1337/tcp open   elite',
+  '',
+  'Scan complete. No vulnerabilities found — good opsec 👀',
+];
+
 interface TerminalProps {
   onToggle: () => void;
 }
@@ -128,6 +180,7 @@ const Terminal = ({ onToggle }: TerminalProps) => {
   const [input, setInput] = useState('');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const [isAnimating, setIsAnimating] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -146,9 +199,19 @@ const Terminal = ({ onToggle }: TerminalProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const trimmed = input.trim();
+    const cmd = trimmed.split(' ')[0]?.toLowerCase();
 
     if (trimmed === 'clear') {
       setLines([]);
+    } else if ((cmd === 'nmap' || cmd === 'hack') && !isAnimating) {
+      setLines(prev => [...prev, { type: 'input', content: `$ ${trimmed}` }]);
+      setIsAnimating(true);
+      SCAN_LINES.forEach((line, i) => {
+        setTimeout(() => {
+          setLines(prev => [...prev, { type: 'output', content: line }]);
+          if (i === SCAN_LINES.length - 1) setIsAnimating(false);
+        }, (i + 1) * 220);
+      });
     } else {
       const newLines = processCommand(input);
       setLines(prev => [...prev, ...newLines]);
@@ -223,6 +286,7 @@ const Terminal = ({ onToggle }: TerminalProps) => {
             className={styles.input}
             autoComplete="off"
             spellCheck={false}
+            disabled={isAnimating}
           />
         </form>
       </div>

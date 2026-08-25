@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { VscSymbolColor, VscTerminal, VscFiles, VscGoToFile, VscGear, VscColorMode, VscHome, VscAccount, VscCode, VscBook, VscMail, VscGithubAlt } from 'react-icons/vsc';
+import { VscSymbolColor, VscTerminal, VscFiles, VscGoToFile, VscGear, VscColorMode, VscHome, VscAccount, VscCode, VscPulse, VscMail, VscGithubAlt } from 'react-icons/vsc';
 import { MdNavigateNext } from 'react-icons/md';
 
 import { THEMES } from '@/lib/themes';
+import { fuzzyScore, fuzzyFilter } from '@/lib/fuzzyMatch';
 import styles from '@/styles/CommandPalette.module.css';
 
 interface Command {
@@ -59,12 +60,12 @@ const CommandPalette = ({ isOpen, onClose, onToggleTerminal, isTerminalOpen }: C
         action: () => router.push('/projects'),
       },
       {
-        id: 'go-articles',
-        label: 'Go to Articles',
+        id: 'go-now',
+        label: 'Go to Now',
         category: 'Navigation',
-        shortcut: 'G R',
-        icon: <VscBook size={16} />,
-        action: () => router.push('/articles'),
+        shortcut: 'G N',
+        icon: <VscPulse size={16} />,
+        action: () => router.push('/now'),
       },
       {
         id: 'go-contact',
@@ -113,15 +114,13 @@ const CommandPalette = ({ isOpen, onClose, onToggleTerminal, isTerminalOpen }: C
 
   const commands = getCommands();
 
+  // Fuzzy-matched but order-preserving, so commands stay grouped by category.
   const filteredCommands = commands.filter(
-    (cmd) =>
-      cmd.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      cmd.category.toLowerCase().includes(searchQuery.toLowerCase())
+    (cmd) => fuzzyScore(searchQuery, `${cmd.label} ${cmd.category}`) !== null
   );
 
-  const filteredThemes = THEMES.filter((theme) =>
-    theme.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Flat list (no grouping), so best matches can float to the top.
+  const filteredThemes = fuzzyFilter(THEMES, searchQuery, (theme) => theme.name);
 
   const handleSelect = useCallback(
     (index: number) => {

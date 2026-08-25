@@ -177,3 +177,33 @@
   --terminal-header-bg: #011627;
   --terminal-border: #262a39;
 }
+
+/* Hacker Green — hidden theme, not listed in Settings/Command Palette */
+[data-theme='hacker-green'] {
+  --main-bg: #000000;
+  --bg-text: #001a00;
+  --text-color: #33ff33;
+  --accent-color: #00ff41;
+  --accent-color-rgb: 0, 255, 65;
+  --titlebar-bg: #000000;
+  --sidebar-bg: #000000;
+  --sidebar-hover-bg: #001a00;
+  --explorer-bg: #000000;
+  --explorer-hover-bg: #001a00;
+  --explorer-border: #003300;
+  --tabs-bg: #000000;
+  --tab-bg: #000000;
+  --tab-active-bg: #001a00;
+  --tab-border: #003300;
+  --bottombar-bg: #001a00;
+  --bottombar-border: #003300;
+  --button-bg: #00ff41;
+  --button-text: #000000;
+  --bottombar-hover-bg: #003300;
+  --scrollbar-track-bg: #000000;
+  --scrollbar-thumb-bg: #00ff41;
+  --article-bg: #001a00;
+  --terminal-bg: #000000;
+  --terminal-header-bg: #000000;
+  --terminal-border: #003300;
+}

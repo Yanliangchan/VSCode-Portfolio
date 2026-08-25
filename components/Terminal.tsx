@@ -30,7 +30,7 @@ const commands: Record<string, () => string[]> = {
   ],
   about: () => [
     "Hi, I'm Chan Yanliang!",
-    'A cybersecurity professional and Officer with the Ministry of Defence,',
+    'A cybersecurity enthusiast and Officer with the Ministry of Defence,',
     'Singapore. My interests span offensive security, defensive security,',
     'software development, automation, and artificial intelligence.',
   ],

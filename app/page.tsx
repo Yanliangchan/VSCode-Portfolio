@@ -21,14 +21,13 @@ export default function HomePage() {
             
             <h1 className={styles.name}>Chan Yanliang</h1>
 
-            <p className={styles.role}>Cybersecurity Professional</p>
+            <p className={styles.role}>Cybersecurity Enthusiast</p>
 
             <div className={styles.divider} />
 
             <p className={styles.description}>
-              Officer with the Ministry of Defence, Singapore. My interests span
-              offensive security, defensive security, software development,
-              automation, and artificial intelligence.
+              My interests span offensive security, defensive security,
+              software development, automation, and artificial intelligence.
             </p>
           </div>
 

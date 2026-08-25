@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: 'Chan Yanliang | %s',
   },
   description:
-    'Chan Yanliang is a cybersecurity professional from Singapore working across offensive security, defensive security, software development, automation, and AI',
+    'Chan Yanliang is a cybersecurity enthusiast from Singapore working across offensive security, defensive security, software development, automation, and AI',
   keywords: [
     'chan yanliang',
     'yanliang',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Chan Yanliang's Portfolio",
     description:
-      'A cybersecurity professional working across offensive security, defensive security, software development, automation, and AI.',
+      'A cybersecurity enthusiast working across offensive security, defensive security, software development, automation, and AI.',
     images: ['https://imgur.com/4zi5KkQ.png'],
     url: 'https://yanliangchan.com',
   },

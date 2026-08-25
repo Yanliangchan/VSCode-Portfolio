@@ -14,7 +14,7 @@ const AboutPage = () => {
           <div className={styles.headerContent}>
             <div className={styles.headerText}>
               <h1 className={styles.name}>Chan Yanliang</h1>
-              <p className={styles.role}>Cybersecurity Professional</p>
+              <p className={styles.role}>Cybersecurity Enthusiast</p>
               <div className={styles.location}>
                 <span className={styles.dot} />
                 Singapore
@@ -46,34 +46,18 @@ const AboutPage = () => {
             </div>
 
             <div className={styles.sectionBody}>
-              <p className={styles.paragraph}>Hello 👋 I&apos;m Yanliang.</p>
-
               <p className={styles.paragraph}>
-                I&apos;m a cybersecurity professional with a background in
-                Cybersecurity &amp; Digital Forensics. My interests span
-                offensive security, defensive security, software development,
-                automation, and artificial intelligence.
-              </p>
-
-              <p className={styles.paragraph}>
-                I enjoy working across different parts of technology. One day,
-                I might be analysing a system or learning how an operating
-                system works. Another day, I might be building a web
-                application, automating a repetitive workflow, or
-                experimenting with AI.
+                Hello 👋 I&apos;m Yanliang, a cybersecurity enthusiast with a
+                background in Cybersecurity &amp; Digital Forensics. My
+                interests span offensive and defensive security, software
+                development, automation, and AI — I believe the best way to
+                learn technology is to build things with it.
               </p>
 
               <p className={styles.paragraph}>
                 Outside of technical work, I enjoy teaching and contributing
-                to the cybersecurity community. I&apos;ve worked with
-                students, youth organisations, and cybersecurity communities
-                through workshops, CTFs, robotics programmes, and technology
-                events.
-              </p>
-
-              <p className={styles.paragraph}>
-                I believe the best way to learn technology is to build things
-                with it.
+                to the cybersecurity community through workshops, CTFs, and
+                robotics programmes for students and young professionals.
               </p>
             </div>
           </section>
@@ -92,18 +76,10 @@ const AboutPage = () => {
                 </div>
                 <h3 className={styles.expRole}>Regular Officer</h3>
                 <p className={styles.expCompany}>Ministry of Defence</p>
-                <ul className={styles.expList}>
-                  <li>
-                    Working in a technology-focused military environment
-                    where cybersecurity, digital systems, leadership, and
-                    operational requirements intersect
-                  </li>
-                  <li>
-                    Developing technical and leadership capabilities through
-                    professional military training and real-world problem
-                    solving
-                  </li>
-                </ul>
+                <p className={styles.expDesc}>
+                  Working in a technology-focused military environment where
+                  cybersecurity, digital systems, and leadership intersect.
+                </p>
               </div>
 
               <div className={styles.experienceCard}>
@@ -114,16 +90,10 @@ const AboutPage = () => {
                 <p className={styles.expCompany}>
                   Cyber Security Agency of Singapore
                 </p>
-                <ul className={styles.expList}>
-                  <li>
-                    Gained professional exposure to Singapore&apos;s national
-                    cybersecurity landscape
-                  </li>
-                  <li>
-                    Worked on cybersecurity-related projects in a consulting
-                    environment
-                  </li>
-                </ul>
+                <p className={styles.expDesc}>
+                  Worked on cybersecurity projects within Singapore&apos;s
+                  national cybersecurity agency.
+                </p>
               </div>
 
               <div className={styles.experienceCard}>
@@ -132,14 +102,9 @@ const AboutPage = () => {
                 </div>
                 <h3 className={styles.expRole}>Coding &amp; Robotics Educator</h3>
                 <p className={styles.expCompany}>NK Robotics</p>
-                <ul className={styles.expList}>
-                  <li>Teach programming and robotics to students aged 5 to 17</li>
-                  <li>
-                    Design and deliver lessons that introduce students to
-                    programming, computational thinking, and practical
-                    problem solving
-                  </li>
-                </ul>
+                <p className={styles.expDesc}>
+                  Teaching programming and robotics to students aged 5 to 17.
+                </p>
               </div>
 
               <div className={styles.experienceCard}>
@@ -150,17 +115,10 @@ const AboutPage = () => {
                 <p className={styles.expCompany}>
                   ISC² Singapore Chapter Youth Wing
                 </p>
-                <ul className={styles.expList}>
-                  <li>
-                    Support the development of youth cybersecurity initiatives
-                    and community programmes
-                  </li>
-                  <li>
-                    Help organise cybersecurity events, workshops, CTFs, and
-                    activities that connect students and young professionals
-                    with the industry
-                  </li>
-                </ul>
+                <p className={styles.expDesc}>
+                  Organised cybersecurity workshops, CTFs, and youth community
+                  programmes.
+                </p>
               </div>
 
               <div className={styles.experienceCard}>
@@ -169,17 +127,10 @@ const AboutPage = () => {
                 </div>
                 <h3 className={styles.expRole}>Head of Technology</h3>
                 <p className={styles.expCompany}>NullSec</p>
-                <ul className={styles.expList}>
-                  <li>
-                    Led the technical team in organising cybersecurity
-                    workshops, competitions, and community events
-                  </li>
-                  <li>
-                    Developed and reviewed more than 100 challenges for CTF
-                    competitions and helped create technical content for
-                    participants
-                  </li>
-                </ul>
+                <p className={styles.expDesc}>
+                  Led the technical team organising CTFs, and developed 100+
+                  competition challenges.
+                </p>
               </div>
             </div>
           </section>
@@ -251,26 +202,22 @@ const AboutPage = () => {
             </div>
 
             <div className={styles.sectionBody}>
-              <div className={styles.experienceCard}>
-                <h3 className={styles.expRole}>Synapse</h3>
-                <p className={styles.expDesc}>
-                  A collaborative study platform designed around shared notes
-                  and private AI-powered revision. The platform combines
-                  real-time collaboration with personalised study tools such
-                  as summaries, flashcards, quizzes, and an AI study
-                  assistant.
-                </p>
-              </div>
+              <div className={styles.skillsGrid}>
+                <div className={styles.experienceCard}>
+                  <h3 className={styles.expRole}>Synapse</h3>
+                  <p className={styles.expDesc}>
+                    A collaborative study platform with shared notes and
+                    private, AI-powered revision tools.
+                  </p>
+                </div>
 
-              <div className={styles.experienceCard}>
-                <h3 className={styles.expRole}>Hookline</h3>
-                <p className={styles.expDesc}>
-                  A gamified phishing simulator designed to test and improve
-                  a user&apos;s ability to identify malicious emails. The
-                  experience uses an inbox-based game mechanic where users
-                  investigate messages and decide whether they are legitimate
-                  or phishing attempts.
-                </p>
+                <div className={styles.experienceCard}>
+                  <h3 className={styles.expRole}>Hookline</h3>
+                  <p className={styles.expDesc}>
+                    A gamified phishing simulator that tests and improves
+                    your ability to spot malicious emails.
+                  </p>
+                </div>
               </div>
             </div>
           </section>
@@ -283,29 +230,27 @@ const AboutPage = () => {
             </div>
 
             <div className={styles.sectionBody}>
-              <div className={styles.experienceCard}>
-                <h3 className={styles.expRole}>Network Defense Essentials</h3>
-                <p className={styles.expCompany}>EC-Council · April 2024</p>
-              </div>
-
-              <div className={styles.experienceCard}>
-                <h3 className={styles.expRole}>Enterprise Security Management</h3>
-                <p className={styles.expCompany}>Palo Alto Networks · November 2024</p>
-              </div>
-
-              <div className={styles.experienceCard}>
-                <h3 className={styles.expRole}>Ethical Hacking Essentials</h3>
-                <p className={styles.expCompany}>EC-Council · October 2023</p>
-              </div>
-
-              <div className={styles.experienceCard}>
-                <h3 className={styles.expRole}>Google Cybersecurity Certificate</h3>
-                <p className={styles.expCompany}>Google · October 2023</p>
-              </div>
-
-              <div className={styles.experienceCard}>
-                <h3 className={styles.expRole}>Network Defense</h3>
-                <p className={styles.expCompany}>Cisco · May 2022</p>
+              <div className={styles.writingLinks}>
+                <div className={styles.writingLink}>
+                  <span>Network Defense Essentials</span>
+                  <span>EC-Council · Apr 2024</span>
+                </div>
+                <div className={styles.writingLink}>
+                  <span>Enterprise Security Management</span>
+                  <span>Palo Alto Networks · Nov 2024</span>
+                </div>
+                <div className={styles.writingLink}>
+                  <span>Ethical Hacking Essentials</span>
+                  <span>EC-Council · Oct 2023</span>
+                </div>
+                <div className={styles.writingLink}>
+                  <span>Google Cybersecurity Certificate</span>
+                  <span>Google · Oct 2023</span>
+                </div>
+                <div className={styles.writingLink}>
+                  <span>Network Defense</span>
+                  <span>Cisco · May 2022</span>
+                </div>
               </div>
             </div>
           </section>
@@ -318,28 +263,19 @@ const AboutPage = () => {
             </div>
 
             <div className={styles.sectionBody}>
-              <div className={styles.experienceCard}>
-                <h3 className={styles.expRole}>The Cybersecurity Award 2025</h3>
-                <p className={styles.expCompany}>Issued by AISP · Nov 2025</p>
-                <p className={styles.expDesc}>
-                  Awarded The Cybersecurity Award (TCA) 2025 Student Category.
-                </p>
-              </div>
-
-              <div className={styles.experienceCard}>
-                <h3 className={styles.expRole}>SAP AppGyver Champion</h3>
-                <p className={styles.expCompany}>
-                  Issued by SAP, Temasek Polytechnic · Dec 2022
-                </p>
-              </div>
-
-              <div className={styles.experienceCard}>
-                <h3 className={styles.expRole}>
-                  Student Volunteer Recognition Programme (SVRP) 2023
-                </h3>
-                <p className={styles.expCompany}>
-                  Issued by Association of Information Security Professionals
-                </p>
+              <div className={styles.writingLinks}>
+                <div className={styles.writingLink}>
+                  <span>The Cybersecurity Award 2025 (Student Category)</span>
+                  <span>AISP · Nov 2025</span>
+                </div>
+                <div className={styles.writingLink}>
+                  <span>SAP AppGyver Champion</span>
+                  <span>SAP, Temasek Polytechnic · Dec 2022</span>
+                </div>
+                <div className={styles.writingLink}>
+                  <span>Student Volunteer Recognition Programme 2023</span>
+                  <span>AiSP</span>
+                </div>
               </div>
             </div>
           </section>

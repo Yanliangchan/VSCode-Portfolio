@@ -1,9 +1,25 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
+import { JetBrains_Mono, Source_Sans_3 } from 'next/font/google';
 
 import Layout from '@/components/Layout';
 
 import '@/styles/globals.css';
 import '@/styles/themes.css';
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
+const sourceSans = Source_Sans_3({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-sans',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -44,17 +60,19 @@ const themeScript = `
   })();
 `;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const nonce = (await headers()).get('x-nonce') ?? undefined;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>
+      <body className={`${jetbrainsMono.variable} ${sourceSans.variable}`}>
         <Layout>{children}</Layout>
       </body>
     </html>

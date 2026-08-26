@@ -37,112 +37,160 @@ const AboutPage = () => {
           </div>
         </header>
 
-        <div className={styles.content}>
-          {/* Bio Section */}
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionNumber}>01</span>
-              <h2 className={styles.sectionTitle}>About Me</h2>
-            </div>
-
-            <div className={styles.sectionBody}>
-              <p className={styles.paragraph}>
-                Hello 👋 I&apos;m Yanliang, a cybersecurity enthusiast with a
-                background in Cybersecurity &amp; Digital Forensics. My
-                interests span offensive and defensive security, software
-                development, automation, and AI — I believe the best way to
-                learn technology is to build things with it.
-              </p>
-
-              <p className={styles.paragraph}>
-                Outside of technical work, I enjoy teaching and contributing
-                to the cybersecurity community through workshops, CTFs, and
-                robotics programmes for students and young professionals.
-              </p>
-            </div>
-          </section>
-
-          {/* Experience Section */}
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionNumber}>02</span>
-              <h2 className={styles.sectionTitle}>Experience</h2>
-            </div>
-
-            <div className={styles.sectionBody}>
-              <div className={styles.experienceCard}>
-                <div className={styles.expMeta}>
-                  <span className={styles.expPeriod}>Present</span>
-                </div>
-                <h3 className={styles.expRole}>Regular Officer</h3>
-                <p className={styles.expCompany}>Ministry of Defence</p>
-                <p className={styles.expDesc}>
-                  Working in a technology-focused military environment where
-                  cybersecurity, digital systems, and leadership intersect.
-                </p>
+        <div className={styles.body}>
+          {/* Main column: narrative content */}
+          <div className={styles.main}>
+            {/* About Me */}
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <span className={styles.sectionNumber}>01</span>
+                <h2 className={styles.sectionTitle}>About Me</h2>
               </div>
 
-              <div className={styles.experienceCard}>
-                <div className={styles.expMeta}>
-                  <span className={styles.expPeriod}>Sep 2024 — Mar 2025</span>
-                </div>
-                <h3 className={styles.expRole}>Consultant Intern</h3>
-                <p className={styles.expCompany}>
-                  Cyber Security Agency of Singapore
+              <div className={styles.sectionBody}>
+                <p className={styles.paragraph}>
+                  Hello 👋 I&apos;m Yanliang, a cybersecurity enthusiast with a
+                  background in Cybersecurity &amp; Digital Forensics. My
+                  interests span offensive and defensive security, software
+                  development, automation, and AI — I believe the best way to
+                  learn technology is to build things with it.
                 </p>
-                <p className={styles.expDesc}>
-                  Worked on cybersecurity projects within Singapore&apos;s
-                  national cybersecurity agency.
+
+                <p className={styles.paragraph}>
+                  Outside of technical work, I enjoy teaching and contributing
+                  to the cybersecurity community through workshops, CTFs, and
+                  robotics programmes for students and young professionals.
                 </p>
               </div>
+            </section>
 
-              <div className={styles.experienceCard}>
-                <div className={styles.expMeta}>
-                  <span className={styles.expPeriod}>Sep 2023 — Present</span>
-                </div>
-                <h3 className={styles.expRole}>Coding &amp; Robotics Educator</h3>
-                <p className={styles.expCompany}>NK Robotics</p>
-                <p className={styles.expDesc}>
-                  Teaching programming and robotics to students aged 5 to 17.
-                </p>
+            {/* Experience */}
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <span className={styles.sectionNumber}>02</span>
+                <h2 className={styles.sectionTitle}>Experience</h2>
               </div>
 
-              <div className={styles.experienceCard}>
-                <div className={styles.expMeta}>
-                  <span className={styles.expPeriod}>Jan 2023 — Aug 2025</span>
-                </div>
-                <h3 className={styles.expRole}>Secretary</h3>
-                <p className={styles.expCompany}>
-                  ISC² Singapore Chapter Youth Wing
-                </p>
-                <p className={styles.expDesc}>
-                  Organised cybersecurity workshops, CTFs, and youth community
-                  programmes.
-                </p>
+              <div className={styles.sectionBody}>
+                <ol className={styles.timeline}>
+                  <li className={styles.timelineItem}>
+                    <div className={styles.timelineMarker} />
+                    <div className={styles.timelineContent}>
+                      <div className={styles.timelineTop}>
+                        <h3 className={styles.expRole}>Regular Officer</h3>
+                        <span className={styles.expPeriod}>Present</span>
+                      </div>
+                      <p className={styles.expCompany}>Ministry of Defence</p>
+                      <p className={styles.expDesc}>
+                        Working in a technology-focused military environment
+                        where cybersecurity, digital systems, and leadership
+                        intersect.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li className={styles.timelineItem}>
+                    <div className={styles.timelineMarker} />
+                    <div className={styles.timelineContent}>
+                      <div className={styles.timelineTop}>
+                        <h3 className={styles.expRole}>Consultant Intern</h3>
+                        <span className={styles.expPeriod}>Sep 2024 — Mar 2025</span>
+                      </div>
+                      <p className={styles.expCompany}>
+                        Cyber Security Agency of Singapore
+                      </p>
+                      <p className={styles.expDesc}>
+                        Worked on cybersecurity projects within Singapore&apos;s
+                        national cybersecurity agency.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li className={styles.timelineItem}>
+                    <div className={styles.timelineMarker} />
+                    <div className={styles.timelineContent}>
+                      <div className={styles.timelineTop}>
+                        <h3 className={styles.expRole}>
+                          Coding &amp; Robotics Educator
+                        </h3>
+                        <span className={styles.expPeriod}>Sep 2023 — Present</span>
+                      </div>
+                      <p className={styles.expCompany}>NK Robotics</p>
+                      <p className={styles.expDesc}>
+                        Teaching programming and robotics to students aged 5
+                        to 17.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li className={styles.timelineItem}>
+                    <div className={styles.timelineMarker} />
+                    <div className={styles.timelineContent}>
+                      <div className={styles.timelineTop}>
+                        <h3 className={styles.expRole}>Secretary</h3>
+                        <span className={styles.expPeriod}>Jan 2023 — Aug 2025</span>
+                      </div>
+                      <p className={styles.expCompany}>
+                        ISC² Singapore Chapter Youth Wing
+                      </p>
+                      <p className={styles.expDesc}>
+                        Organised cybersecurity workshops, CTFs, and youth
+                        community programmes.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li className={styles.timelineItem}>
+                    <div className={styles.timelineMarker} />
+                    <div className={styles.timelineContent}>
+                      <div className={styles.timelineTop}>
+                        <h3 className={styles.expRole}>Head of Technology</h3>
+                        <span className={styles.expPeriod}>Apr 2023 — Sep 2024</span>
+                      </div>
+                      <p className={styles.expCompany}>NullSec</p>
+                      <p className={styles.expDesc}>
+                        Led the technical team organising CTFs, and developed
+                        100+ competition challenges.
+                      </p>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+            </section>
+
+            {/* Selected Projects */}
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <span className={styles.sectionNumber}>03</span>
+                <h2 className={styles.sectionTitle}>Selected Projects</h2>
               </div>
 
-              <div className={styles.experienceCard}>
-                <div className={styles.expMeta}>
-                  <span className={styles.expPeriod}>Apr 2023 — Sep 2024</span>
+              <div className={styles.sectionBody}>
+                <div className={styles.projectsGrid}>
+                  <div className={styles.projectCard}>
+                    <h3 className={styles.expRole}>Synapse</h3>
+                    <p className={styles.expDesc}>
+                      A collaborative study platform with shared notes and
+                      private, AI-powered revision tools.
+                    </p>
+                  </div>
+
+                  <div className={styles.projectCard}>
+                    <h3 className={styles.expRole}>Hookline</h3>
+                    <p className={styles.expDesc}>
+                      A gamified phishing simulator that tests and improves
+                      your ability to spot malicious emails.
+                    </p>
+                  </div>
                 </div>
-                <h3 className={styles.expRole}>Head of Technology</h3>
-                <p className={styles.expCompany}>NullSec</p>
-                <p className={styles.expDesc}>
-                  Led the technical team organising CTFs, and developed 100+
-                  competition challenges.
-                </p>
               </div>
-            </div>
-          </section>
+            </section>
+          </div>
 
-          {/* Skills Section */}
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionNumber}>03</span>
-              <h2 className={styles.sectionTitle}>Skills</h2>
-            </div>
-
-            <div className={styles.sectionBody}>
+          {/* Sidebar: reference/lookup content */}
+          <div className={styles.sidebar}>
+            <div className={styles.sidebarSection}>
+              <h4 className={styles.sidebarHeading}>Skills</h4>
               <div className={styles.skillsGrid}>
                 <div className={styles.skillCategory}>
                   <h4 className={styles.skillTitle}>Cybersecurity</h4>
@@ -192,93 +240,51 @@ const AboutPage = () => {
                 </div>
               </div>
             </div>
-          </section>
 
-          {/* Selected Projects Section */}
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionNumber}>04</span>
-              <h2 className={styles.sectionTitle}>Selected Projects</h2>
-            </div>
-
-            <div className={styles.sectionBody}>
-              <div className={styles.skillsGrid}>
-                <div className={styles.experienceCard}>
-                  <h3 className={styles.expRole}>Synapse</h3>
-                  <p className={styles.expDesc}>
-                    A collaborative study platform with shared notes and
-                    private, AI-powered revision tools.
-                  </p>
-                </div>
-
-                <div className={styles.experienceCard}>
-                  <h3 className={styles.expRole}>Hookline</h3>
-                  <p className={styles.expDesc}>
-                    A gamified phishing simulator that tests and improves
-                    your ability to spot malicious emails.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Certifications Section */}
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionNumber}>05</span>
-              <h2 className={styles.sectionTitle}>Certifications</h2>
-            </div>
-
-            <div className={styles.sectionBody}>
-              <div className={styles.writingLinks}>
-                <div className={styles.writingLink}>
+            <div className={styles.sidebarSection}>
+              <h4 className={styles.sidebarHeading}>Certifications</h4>
+              <div className={styles.metaList}>
+                <div className={styles.metaListItem}>
                   <span>Network Defense Essentials</span>
                   <span>EC-Council · Apr 2024</span>
                 </div>
-                <div className={styles.writingLink}>
+                <div className={styles.metaListItem}>
                   <span>Enterprise Security Management</span>
                   <span>Palo Alto Networks · Nov 2024</span>
                 </div>
-                <div className={styles.writingLink}>
+                <div className={styles.metaListItem}>
                   <span>Ethical Hacking Essentials</span>
                   <span>EC-Council · Oct 2023</span>
                 </div>
-                <div className={styles.writingLink}>
+                <div className={styles.metaListItem}>
                   <span>Google Cybersecurity Certificate</span>
                   <span>Google · Oct 2023</span>
                 </div>
-                <div className={styles.writingLink}>
+                <div className={styles.metaListItem}>
                   <span>Network Defense</span>
                   <span>Cisco · May 2022</span>
                 </div>
               </div>
             </div>
-          </section>
 
-          {/* Awards Section */}
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <span className={styles.sectionNumber}>06</span>
-              <h2 className={styles.sectionTitle}>Awards</h2>
-            </div>
-
-            <div className={styles.sectionBody}>
-              <div className={styles.writingLinks}>
-                <div className={styles.writingLink}>
+            <div className={styles.sidebarSection}>
+              <h4 className={styles.sidebarHeading}>Awards</h4>
+              <div className={styles.metaList}>
+                <div className={styles.metaListItem}>
                   <span>The Cybersecurity Award 2025 (Student Category)</span>
                   <span>AISP · Nov 2025</span>
                 </div>
-                <div className={styles.writingLink}>
+                <div className={styles.metaListItem}>
                   <span>SAP AppGyver Champion</span>
                   <span>SAP, Temasek Polytechnic · Dec 2022</span>
                 </div>
-                <div className={styles.writingLink}>
+                <div className={styles.metaListItem}>
                   <span>Student Volunteer Recognition Programme 2023</span>
                   <span>AiSP</span>
                 </div>
               </div>
             </div>
-          </section>
+          </div>
         </div>
 
         <footer className={styles.footer}>

@@ -17,7 +17,10 @@ export function proxy(request: NextRequest) {
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: avatars.githubusercontent.com imgur.com",
     "font-src 'self'",
-    "connect-src 'self' api.github.com",
+    // github-contributions-api.jogruber.de: react-github-calendar
+    // (used on /github) fetches contribution data from this third-party
+    // host client-side, not from api.github.com.
+    "connect-src 'self' api.github.com github-contributions-api.jogruber.de",
     "frame-ancestors 'none'",
     "object-src 'none'",
     "base-uri 'self'",

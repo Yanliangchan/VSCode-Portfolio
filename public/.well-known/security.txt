@@ -1,0 +1,4 @@
+Contact: mailto:yanliangchan@gmail.com
+Expires: 2027-08-26T06:20:44Z
+Preferred-Languages: en
+Canonical: https://yanliangchan.com/.well-known/security.txt

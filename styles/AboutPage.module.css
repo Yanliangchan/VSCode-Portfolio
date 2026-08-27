@@ -2,7 +2,10 @@
 
 .page {
   width: 100%;
-  background: var(--main-bg);
+  background:
+    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    var(--main-bg);
+  background-size: 24px 24px;
 }
 
 .container {
@@ -106,16 +109,16 @@
   transform: translateY(-2px);
 }
 
-/* Two-column body: sidebar (reference/meta) + main (narrative) */
+/* Two-column body: main (narrative, left) + sidebar (reference/meta, right) */
 .body {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 1fr 300px;
   gap: 40px;
   align-items: start;
 }
 
 .main {
-  grid-column: 2;
+  grid-column: 1;
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -123,7 +126,7 @@
 }
 
 .sidebar {
-  grid-column: 1;
+  grid-column: 2;
   grid-row: 1;
   display: flex;
   flex-direction: column;
@@ -132,17 +135,27 @@
   top: 0;
 }
 
-.main > *,
-.sidebar > * {
-  animation: revealUp 0.4s ease-out both;
+/* Scroll-triggered reveal — elements fade/slide in as they cross into
+   view (via IntersectionObserver, see useRevealObserver in page.tsx),
+   instead of all animating on mount before you ever scroll to them. */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-.main > *:nth-child(1) { animation-delay: 0.05s; }
-.main > *:nth-child(2) { animation-delay: 0.12s; }
-.main > *:nth-child(3) { animation-delay: 0.19s; }
-.sidebar > *:nth-child(1) { animation-delay: 0.08s; }
-.sidebar > *:nth-child(2) { animation-delay: 0.15s; }
-.sidebar > *:nth-child(3) { animation-delay: 0.22s; }
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.main > *:nth-child(1) { transition-delay: 0.05s; }
+.main > *:nth-child(2) { transition-delay: 0.1s; }
+.main > *:nth-child(3) { transition-delay: 0.15s; }
+.main > *:nth-child(4) { transition-delay: 0.2s; }
+.sidebar > *:nth-child(1) { transition-delay: 0.08s; }
+.sidebar > *:nth-child(2) { transition-delay: 0.13s; }
+.sidebar > *:nth-child(3) { transition-delay: 0.18s; }
 
 @keyframes revealUp {
   from { opacity: 0; transform: translateY(8px); }
@@ -209,11 +222,17 @@
 
 .sidebarHeading {
   margin: 0;
+  font-family: var(--font-mono);
   font-size: 11px;
   color: rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 600;
+}
+
+.sidebarHeading::before {
+  content: '> ';
+  color: var(--accent-color);
 }
 
 /* Experience timeline */
@@ -242,11 +261,24 @@
   height: 9px;
   border-radius: 50%;
   background: var(--accent-color);
-  box-shadow: 0 0 0 3px var(--main-bg);
+  box-shadow:
+    0 0 0 3px var(--main-bg),
+    0 0 8px rgba(var(--accent-color-rgb), 0.6);
 }
 
 .timelineItem:first-child .timelineMarker {
   animation: pulse 2s ease-in-out infinite;
+}
+
+.timelineContent {
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.timelineContent:hover {
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 0 16px rgba(var(--accent-color-rgb), 0.1);
 }
 
 .timelineTop {
@@ -284,6 +316,38 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+/* Education */
+.eduGroup {
+  margin-top: 10px;
+}
+
+.eduLabel {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.eduLabel::before {
+  content: '> ';
+  color: var(--accent-color);
+}
+
+.eduList {
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.eduList li {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 /* Skills */
 .skillsGrid {
   display: flex;
@@ -295,21 +359,33 @@
   padding: 14px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--explorer-border);
+  border-left: 2px solid rgba(var(--accent-color-rgb), 0.5);
   border-radius: 8px;
   transition: all 0.2s ease;
 }
 
 .skillCategory:hover {
   background: rgba(255, 255, 255, 0.04);
+  border-left-color: var(--accent-color);
+  box-shadow:
+    0 0 0 1px rgba(var(--accent-color-rgb), 0.3),
+    0 0 20px rgba(var(--accent-color-rgb), 0.12);
+  transform: translateY(-2px);
 }
 
 .skillTitle {
   margin: 0 0 10px 0;
+  font-family: var(--font-mono);
   font-size: 11px;
   color: rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 600;
+}
+
+.skillTitle::before {
+  content: '> ';
+  color: var(--accent-color);
 }
 
 .skillTags {
@@ -351,7 +427,11 @@
 
 .projectCard:hover {
   background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(var(--accent-color-rgb), 0.3);
+  box-shadow:
+    0 0 0 1px rgba(var(--accent-color-rgb), 0.3),
+    0 0 20px rgba(var(--accent-color-rgb), 0.12);
+  transform: translateY(-2px);
 }
 
 /* Certifications / Awards — shared compact meta-list */
@@ -376,8 +456,10 @@
 
 .metaListItem:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(var(--accent-color-rgb), 0.3);
+  box-shadow: 0 0 16px rgba(var(--accent-color-rgb), 0.1);
   color: var(--text-color);
+  transform: translateX(2px);
 }
 
 .metaListItem span:last-child {
@@ -417,11 +499,22 @@
   }
 
   .header,
-  .main > *,
-  .sidebar > *,
   .dot,
   .timelineItem:first-child .timelineMarker {
     animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .skillCategory:hover,
+  .projectCard:hover,
+  .metaListItem:hover,
+  .timelineContent:hover {
+    transform: none;
   }
 }
 

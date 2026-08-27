@@ -1,11 +1,50 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { VscGithub, VscMail } from 'react-icons/vsc';
 import Link from 'next/link';
 
 import styles from '@/styles/AboutPage.module.css';
 
+/** Fades/slides each `[data-reveal]` element in as it scrolls into view,
+ * instead of animating everything on mount before it's ever seen. */
+const useRevealObserver = () => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = ref.current;
+    if (!container) return;
+
+    const targets = container.querySelectorAll<HTMLElement>('[data-reveal]');
+
+    if (typeof IntersectionObserver === 'undefined') {
+      targets.forEach((el) => el.classList.add(styles.visible));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.visible);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    targets.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  return ref;
+};
+
 const AboutPage = () => {
+  const bodyRef = useRevealObserver();
+
   return (
     <div className={styles.page}>
       <div className={styles.container}>
@@ -37,13 +76,13 @@ const AboutPage = () => {
           </div>
         </header>
 
-        <div className={styles.body}>
+        <div className={styles.body} ref={bodyRef}>
           {/* Main column: narrative content */}
           <div className={styles.main}>
             {/* About Me */}
-            <section className={styles.section}>
+            <section className={`${styles.section} ${styles.reveal}`} data-reveal>
               <div className={styles.sectionHeader}>
-                <span className={styles.sectionNumber}>01</span>
+                <span className={styles.sectionNumber}>// 01</span>
                 <h2 className={styles.sectionTitle}>About Me</h2>
               </div>
 
@@ -65,9 +104,9 @@ const AboutPage = () => {
             </section>
 
             {/* Experience */}
-            <section className={styles.section}>
+            <section className={`${styles.section} ${styles.reveal}`} data-reveal>
               <div className={styles.sectionHeader}>
-                <span className={styles.sectionNumber}>02</span>
+                <span className={styles.sectionNumber}>// 02</span>
                 <h2 className={styles.sectionTitle}>Experience</h2>
               </div>
 
@@ -158,10 +197,56 @@ const AboutPage = () => {
               </div>
             </section>
 
-            {/* Selected Projects */}
-            <section className={styles.section}>
+            {/* Education */}
+            <section className={`${styles.section} ${styles.reveal}`} data-reveal>
               <div className={styles.sectionHeader}>
-                <span className={styles.sectionNumber}>03</span>
+                <span className={styles.sectionNumber}>// 03</span>
+                <h2 className={styles.sectionTitle}>Education</h2>
+              </div>
+
+              <div className={styles.sectionBody}>
+                <ol className={styles.timeline}>
+                  <li className={styles.timelineItem}>
+                    <div className={styles.timelineMarker} />
+                    <div className={styles.timelineContent}>
+                      <h3 className={styles.expRole}>
+                        School of InfoComm Technology — Ngee Ann Polytechnic
+                      </h3>
+                      <p className={styles.expCompany}>
+                        Diploma, Cybersecurity and Digital Forensics · Minor
+                        in Psychology
+                      </p>
+
+                      <div className={styles.eduGroup}>
+                        <span className={styles.eduLabel}>Clubs &amp; Societies</span>
+                        <div className={styles.skillTags}>
+                          <span className={styles.skillTag}>NullSec</span>
+                          <span className={styles.skillTag}>Orion</span>
+                          <span className={styles.skillTag}>Overflow</span>
+                          <span className={styles.skillTag}>ICT Society</span>
+                          <span className={styles.skillTag}>GDSC</span>
+                        </div>
+                      </div>
+
+                      <div className={styles.eduGroup}>
+                        <span className={styles.eduLabel}>Positions</span>
+                        <ul className={styles.eduList}>
+                          <li>ORION SIG Exec. Vice-President</li>
+                          <li>ICT Society Head of Project</li>
+                          <li>NullSec Head of Tech</li>
+                          <li>GDSC Tech Specialist</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+            </section>
+
+            {/* Selected Projects */}
+            <section className={`${styles.section} ${styles.reveal}`} data-reveal>
+              <div className={styles.sectionHeader}>
+                <span className={styles.sectionNumber}>// 04</span>
                 <h2 className={styles.sectionTitle}>Selected Projects</h2>
               </div>
 
@@ -189,7 +274,7 @@ const AboutPage = () => {
 
           {/* Sidebar: reference/lookup content */}
           <div className={styles.sidebar}>
-            <div className={styles.sidebarSection}>
+            <div className={`${styles.sidebarSection} ${styles.reveal}`} data-reveal>
               <h4 className={styles.sidebarHeading}>Skills</h4>
               <div className={styles.skillsGrid}>
                 <div className={styles.skillCategory}>
@@ -197,11 +282,9 @@ const AboutPage = () => {
                   <div className={styles.skillTags}>
                     <span className={styles.skillTag}>Penetration Testing</span>
                     <span className={styles.skillTag}>Network Security</span>
-                    <span className={styles.skillTag}>Digital Forensics</span>
-                    <span className={styles.skillTag}>OSINT</span>
                     <span className={styles.skillTag}>Security Testing</span>
                     <span className={styles.skillTag}>Security Automation</span>
-                    <span className={styles.skillTag}>Phishing &amp; Social Engineering</span>
+                    <span className={styles.skillTag}>Cyber Risk Management</span>
                   </div>
                 </div>
 
@@ -241,7 +324,7 @@ const AboutPage = () => {
               </div>
             </div>
 
-            <div className={styles.sidebarSection}>
+            <div className={`${styles.sidebarSection} ${styles.reveal}`} data-reveal>
               <h4 className={styles.sidebarHeading}>Certifications</h4>
               <div className={styles.metaList}>
                 <div className={styles.metaListItem}>
@@ -267,7 +350,7 @@ const AboutPage = () => {
               </div>
             </div>
 
-            <div className={styles.sidebarSection}>
+            <div className={`${styles.sidebarSection} ${styles.reveal}`} data-reveal>
               <h4 className={styles.sidebarHeading}>Awards</h4>
               <div className={styles.metaList}>
                 <div className={styles.metaListItem}>
@@ -279,8 +362,8 @@ const AboutPage = () => {
                   <span>SAP, Temasek Polytechnic · Dec 2022</span>
                 </div>
                 <div className={styles.metaListItem}>
-                  <span>Student Volunteer Recognition Programme 2023</span>
-                  <span>AiSP</span>
+                  <span>Student Volunteer Recognition Programme</span>
+                  <span>AiSP · 2023</span>
                 </div>
               </div>
             </div>

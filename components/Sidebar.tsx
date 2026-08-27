@@ -10,12 +10,16 @@ import {
   VscCode,
   VscFiles,
   VscPulse,
+  VscSourceControl,
+  VscExtensions,
 } from 'react-icons/vsc';
 
 import styles from '@/styles/Sidebar.module.css';
 
 const sidebarTopItems = [
   { Icon: VscFiles, path: '/' },
+  { Icon: VscSourceControl, path: '/source-control' },
+  { Icon: VscExtensions, path: '/extensions' },
   { Icon: VscGithubAlt, path: '/github' },
   { Icon: VscCode, path: '/projects' },
   { Icon: VscPulse, path: '/now' },

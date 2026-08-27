@@ -5,6 +5,30 @@
   overflow-x: auto;
 }
 
+.splitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34px;
+  background: none;
+  border: none;
+  border-left: 1px solid var(--explorer-border);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.splitButton:hover {
+  color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+@media screen and (max-width: 900px) {
+  .splitButton {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .tabs {
     width: 78vw;

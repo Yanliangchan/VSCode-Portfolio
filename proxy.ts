@@ -21,7 +21,9 @@ export function proxy(request: NextRequest) {
     // (used on /github) fetches contribution data from this third-party
     // host client-side, not from api.github.com.
     "connect-src 'self' api.github.com github-contributions-api.jogruber.de",
-    "frame-ancestors 'none'",
+    // 'self' (not 'none') so the split-editor view can embed another page
+    // of this same site in an iframe; third-party framing is still blocked.
+    "frame-ancestors 'self'",
     "object-src 'none'",
     "base-uri 'self'",
   ].join('; ');

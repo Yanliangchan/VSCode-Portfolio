@@ -14,6 +14,8 @@ const BREADCRUMB_MAP: Record<string, { filename: string; icon: string; symbol: s
   '/now': { filename: 'now.txt', icon: '/logos/txt_icon.svg', symbol: 'NowPage' },
   '/github': { filename: 'github.md', icon: '/logos/markdown_icon.svg', symbol: 'GithubPage' },
   '/settings': { filename: 'settings.tsx', icon: '/logos/react_icon.svg', symbol: 'SettingsPage' },
+  '/extensions': { filename: 'extensions.tsx', icon: '/logos/react_icon.svg', symbol: 'ExtensionsPage' },
+  '/source-control': { filename: 'source-control.tsx', icon: '/logos/react_icon.svg', symbol: 'SourceControlPage' },
 };
 
 const Breadcrumbs = () => {

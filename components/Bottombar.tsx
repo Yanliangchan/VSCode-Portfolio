@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import {
-  VscBell,
   VscCheck,
   VscError,
   VscWarning,
@@ -12,6 +11,7 @@ import {
 } from 'react-icons/vsc';
 import { SiNextdotjs } from 'react-icons/si';
 
+import NotificationBell from '@/components/NotificationBell';
 import styles from '@/styles/Bottombar.module.css';
 
 const LANGUAGE_MODES: Record<string, string> = {
@@ -98,7 +98,7 @@ const Bottombar = ({ onTerminalToggle, isTerminalOpen }: BottombarProps) => {
           <p>{languageMode}</p>
         </div>
         <div className={styles.section}>
-          <VscBell />
+          <NotificationBell />
         </div>
       </div>
     </footer>

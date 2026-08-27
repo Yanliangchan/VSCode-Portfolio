@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { VscSymbolColor, VscTerminal, VscFiles, VscGoToFile, VscGear, VscColorMode, VscHome, VscAccount, VscCode, VscPulse, VscMail, VscGithubAlt } from 'react-icons/vsc';
+import { VscSymbolColor, VscTerminal, VscFiles, VscGoToFile, VscGear, VscColorMode, VscHome, VscAccount, VscCode, VscPulse, VscMail, VscGithubAlt, VscScreenFull, VscExtensions, VscSourceControl, VscSplitHorizontal } from 'react-icons/vsc';
 import { MdNavigateNext } from 'react-icons/md';
 
 import { THEMES } from '@/lib/themes';
@@ -23,9 +23,20 @@ interface CommandPaletteProps {
   onClose: () => void;
   onToggleTerminal: () => void;
   isTerminalOpen: boolean;
+  onToggleZenMode: () => void;
+  isZenMode: boolean;
+  onOpenSplit?: () => void;
 }
 
-const CommandPalette = ({ isOpen, onClose, onToggleTerminal, isTerminalOpen }: CommandPaletteProps) => {
+const CommandPalette = ({
+  isOpen,
+  onClose,
+  onToggleTerminal,
+  isTerminalOpen,
+  onToggleZenMode,
+  isZenMode,
+  onOpenSplit,
+}: CommandPaletteProps) => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -92,6 +103,22 @@ const CommandPalette = ({ isOpen, onClose, onToggleTerminal, isTerminalOpen }: C
         action: () => router.push('/settings'),
       },
       {
+        id: 'go-extensions',
+        label: 'Go to Extensions',
+        category: 'Navigation',
+        shortcut: 'G E',
+        icon: <VscExtensions size={16} />,
+        action: () => router.push('/extensions'),
+      },
+      {
+        id: 'go-source-control',
+        label: 'Go to Source Control',
+        category: 'Navigation',
+        shortcut: 'G V',
+        icon: <VscSourceControl size={16} />,
+        action: () => router.push('/source-control'),
+      },
+      {
         id: 'toggle-terminal',
         label: isTerminalOpen ? 'Close Terminal' : 'Open Terminal',
         category: 'Terminal',
@@ -107,10 +134,28 @@ const CommandPalette = ({ isOpen, onClose, onToggleTerminal, isTerminalOpen }: C
         icon: <VscSymbolColor size={16} />,
         action: () => setShowThemePicker(true),
       },
+      {
+        id: 'toggle-zen-mode',
+        label: isZenMode ? 'Disable Zen Mode' : 'Enable Zen Mode',
+        category: 'View',
+        shortcut: 'K Z',
+        icon: <VscScreenFull size={16} />,
+        action: onToggleZenMode,
+      },
     ];
 
+    if (onOpenSplit) {
+      baseCommands.push({
+        id: 'split-editor-right',
+        label: 'Split Editor Right',
+        category: 'View',
+        icon: <VscSplitHorizontal size={16} />,
+        action: onOpenSplit,
+      });
+    }
+
     return baseCommands;
-  }, [router, onToggleTerminal, isTerminalOpen]);
+  }, [router, onToggleTerminal, isTerminalOpen, onToggleZenMode, isZenMode, onOpenSplit]);
 
   const commands = getCommands();
 

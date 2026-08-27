@@ -12,9 +12,11 @@ import styles from '@/styles/CommandPalette.module.css';
 interface QuickOpenProps {
   isOpen: boolean;
   onClose: () => void;
+  mode?: 'navigate' | 'split';
+  onSplitSelect?: (path: string) => void;
 }
 
-const QuickOpen = ({ isOpen, onClose }: QuickOpenProps) => {
+const QuickOpen = ({ isOpen, onClose, mode = 'navigate', onSplitSelect }: QuickOpenProps) => {
   const router = useRouter();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -26,11 +28,15 @@ const QuickOpen = ({ isOpen, onClose }: QuickOpenProps) => {
   const handleSelect = useCallback(
     (index: number) => {
       if (index < filtered.length) {
-        router.push(filtered[index].path);
+        if (mode === 'split' && onSplitSelect) {
+          onSplitSelect(filtered[index].path);
+        } else {
+          router.push(filtered[index].path);
+        }
         onClose();
       }
     },
-    [filtered, router, onClose]
+    [filtered, router, onClose, mode, onSplitSelect]
   );
 
   const handleKeyDown = useCallback(
@@ -94,7 +100,7 @@ const QuickOpen = ({ isOpen, onClose }: QuickOpenProps) => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Go to file..."
+            placeholder={mode === 'split' ? 'Select file to open in split view...' : 'Go to file...'}
             className={styles.input}
             spellCheck={false}
             autoComplete="off"

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import Titlebar from '@/components/Titlebar';
 import Sidebar from '@/components/Sidebar';
@@ -12,6 +12,8 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import Terminal from '@/components/Terminal';
 import CommandPalette from '@/components/CommandPalette';
 import QuickOpen from '@/components/QuickOpen';
+import SplitPane from '@/components/SplitPane';
+import Minimap from '@/components/Minimap';
 import MatrixRain from '@/components/MatrixRain';
 
 import styles from '@/styles/Layout.module.css';
@@ -29,11 +31,16 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isEmbedded = searchParams.get('embed') === '1';
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isQuickOpenOpen, setIsQuickOpenOpen] = useState(false);
+  const [quickOpenMode, setQuickOpenMode] = useState<'navigate' | 'split'>('navigate');
   const [chordKey, setChordKey] = useState<string | null>(null);
   const [isMatrixRainOn, setIsMatrixRainOn] = useState(false);
+  const [isZenMode, setIsZenMode] = useState(false);
+  const [splitPath, setSplitPath] = useState<string | null>(null);
 
   const toggleTerminal = useCallback(() => {
     setIsTerminalOpen(prev => !prev);
@@ -47,12 +54,25 @@ const Layout = ({ children }: LayoutProps) => {
     setIsCommandPaletteOpen(false);
   }, []);
 
-  const openQuickOpen = useCallback(() => {
+  const openQuickOpen = useCallback((mode: 'navigate' | 'split' = 'navigate') => {
+    setQuickOpenMode(mode);
     setIsQuickOpenOpen(true);
   }, []);
 
   const closeQuickOpen = useCallback(() => {
     setIsQuickOpenOpen(false);
+  }, []);
+
+  const toggleZenMode = useCallback(() => {
+    setIsZenMode(prev => !prev);
+  }, []);
+
+  const openSplit = useCallback((path: string) => {
+    setSplitPath(path);
+  }, []);
+
+  const closeSplit = useCallback(() => {
+    setSplitPath(null);
   }, []);
 
   useEffect(() => {
@@ -97,6 +117,11 @@ const Layout = ({ children }: LayoutProps) => {
         document.documentElement.setAttribute('data-theme', 'hacker-green');
         localStorage.setItem('theme', 'hacker-green');
         setIsMatrixRainOn(true);
+        window.dispatchEvent(
+          new CustomEvent('add-notification', {
+            detail: { message: 'Konami code accepted — hidden theme "hacker-green" unlocked.' },
+          })
+        );
         buffer = [];
       }
     };
@@ -114,10 +139,18 @@ const Layout = ({ children }: LayoutProps) => {
       'c': '/contact',
       'g': '/github',
       's': '/settings',
+      'e': '/extensions',
+      'v': '/source-control',
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (isCommandPaletteOpen || isQuickOpenOpen) return;
+
+      if (isZenMode && e.key === 'Escape') {
+        e.preventDefault();
+        toggleZenMode();
+        return;
+      }
 
       if ((e.ctrlKey || e.metaKey) && e.key === '`') {
         e.preventDefault();
@@ -153,6 +186,13 @@ const Layout = ({ children }: LayoutProps) => {
         return;
       }
 
+      if (chordKey === 'k' && key === 'z') {
+        e.preventDefault();
+        toggleZenMode();
+        setChordKey(null);
+        return;
+      }
+
       if ((key === 'g' || key === 'k') && !(e.target instanceof Element && e.target.closest('input, textarea'))) {
         e.preventDefault();
         setChordKey(key);
@@ -167,33 +207,62 @@ const Layout = ({ children }: LayoutProps) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [toggleTerminal, openCommandPalette, openQuickOpen, chordKey, router, isCommandPaletteOpen, isQuickOpenOpen]);
+  }, [toggleTerminal, openCommandPalette, openQuickOpen, toggleZenMode, chordKey, router, isCommandPaletteOpen, isQuickOpenOpen, isZenMode]);
+
+  if (isEmbedded) {
+    return (
+      <main id="main-editor" className={styles.content}>
+        {children}
+      </main>
+    );
+  }
 
   return (
     <div className={styles.layout}>
-      <Titlebar onOpenCommandPalette={openCommandPalette} />
+      {!isZenMode && <Titlebar onOpenCommandPalette={openCommandPalette} />}
       <div className={styles.main}>
-        <Sidebar />
-        <Explorer />
+        {!isZenMode && <Sidebar />}
+        {!isZenMode && <Explorer />}
         <div className={styles.editorContainer}>
-          <Tabsbar />
-          <Breadcrumbs />
+          {!isZenMode && <Tabsbar onSplitEditor={() => openQuickOpen('split')} />}
+          {!isZenMode && <Breadcrumbs />}
           <div className={styles.editorWithTerminal}>
-            <main id="main-editor" className={styles.content}>
-              {children}
-            </main>
+            <div className={styles.editorRow}>
+              <main id="main-editor" className={styles.content}>
+                {children}
+              </main>
+              {splitPath && !isZenMode && (
+                <SplitPane path={splitPath} onClose={closeSplit} />
+              )}
+              {!isZenMode && <Minimap />}
+            </div>
             {isTerminalOpen && <Terminal onToggle={toggleTerminal} />}
           </div>
         </div>
       </div>
-      <Bottombar onTerminalToggle={toggleTerminal} isTerminalOpen={isTerminalOpen} />
+      {!isZenMode && (
+        <Bottombar onTerminalToggle={toggleTerminal} isTerminalOpen={isTerminalOpen} />
+      )}
+      {isZenMode && (
+        <button className={styles.zenExit} onClick={toggleZenMode}>
+          Exit Zen Mode (Esc)
+        </button>
+      )}
       <CommandPalette
         isOpen={isCommandPaletteOpen}
         onClose={closeCommandPalette}
         onToggleTerminal={toggleTerminal}
         isTerminalOpen={isTerminalOpen}
+        onToggleZenMode={toggleZenMode}
+        isZenMode={isZenMode}
+        onOpenSplit={() => openQuickOpen('split')}
       />
-      <QuickOpen isOpen={isQuickOpenOpen} onClose={closeQuickOpen} />
+      <QuickOpen
+        isOpen={isQuickOpenOpen}
+        onClose={closeQuickOpen}
+        mode={quickOpenMode}
+        onSplitSelect={openSplit}
+      />
       {isMatrixRainOn && (
         <MatrixRain onDismiss={() => setIsMatrixRainOn(false)} />
       )}

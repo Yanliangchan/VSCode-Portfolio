@@ -42,6 +42,28 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex: 1;
+}
+
+.jsonToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--explorer-border);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.jsonToggle:hover {
+  color: var(--accent-color);
+  border-color: rgba(var(--accent-color-rgb), 0.4);
+  background: rgba(var(--accent-color-rgb), 0.08);
 }
 
 .title {
@@ -72,6 +94,41 @@
   color: rgba(255, 255, 255, 0.9);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+/* Settings JSON view */
+.jsonView {
+  margin: 0;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--explorer-border);
+  border-radius: 8px;
+  font-family: var(--font-mono), monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.jsonKey {
+  color: var(--accent-color);
+}
+
+.jsonString {
+  color: #ce9178;
+}
+
+.jsonValue {
+  color: #569cd6;
+}
+
+.jsonPunct {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.jsonBrace {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Themes Grid */

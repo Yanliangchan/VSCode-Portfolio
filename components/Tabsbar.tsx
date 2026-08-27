@@ -1,8 +1,14 @@
+import { VscSplitHorizontal } from 'react-icons/vsc';
+
 import Tab from '@/components/Tab';
 
 import styles from '@/styles/Tabsbar.module.css';
 
-const Tabsbar = () => {
+interface TabsbarProps {
+  onSplitEditor?: () => void;
+}
+
+const Tabsbar = ({ onSplitEditor }: TabsbarProps) => {
   return (
     <div className={styles.tabs}>
       <Tab icon="/logos/react_icon.svg" filename="home.tsx" path="/" />
@@ -19,6 +25,15 @@ const Tabsbar = () => {
         filename="github.md"
         path="/github"
       />
+      {onSplitEditor && (
+        <button
+          className={styles.splitButton}
+          onClick={onSplitEditor}
+          title="Split Editor Right"
+        >
+          <VscSplitHorizontal size={16} />
+        </button>
+      )}
     </div>
   );
 };

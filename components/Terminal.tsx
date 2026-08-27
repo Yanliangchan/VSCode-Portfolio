@@ -181,13 +181,50 @@ const Terminal = ({ onToggle }: TerminalProps) => {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [height, setHeight] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const isResizing = useRef(false);
 
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
+  }, []);
+
+  const handleResizeStart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    isResizing.current = true;
+    document.body.style.cursor = 'row-resize';
+    document.body.style.userSelect = 'none';
+  };
+
+  useEffect(() => {
+    const MIN_HEIGHT = 120;
+    const MAX_HEIGHT = 640;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isResizing.current || !rootRef.current) return;
+      const rect = rootRef.current.getBoundingClientRect();
+      const newHeight = Math.min(MAX_HEIGHT, Math.max(MIN_HEIGHT, rect.bottom - e.clientY));
+      setHeight(newHeight);
+    };
+
+    const handleMouseUp = () => {
+      if (isResizing.current) {
+        isResizing.current = false;
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
   }, []);
 
   useEffect(() => {
@@ -252,7 +289,16 @@ const Terminal = ({ onToggle }: TerminalProps) => {
   };
 
   return (
-    <div className={styles.terminal}>
+    <div
+      className={styles.terminal}
+      ref={rootRef}
+      style={height !== null ? { height: `${height}px` } : undefined}
+    >
+      <div
+        className={styles.resizeHandle}
+        onMouseDown={handleResizeStart}
+        title="Drag to resize"
+      />
       <div className={styles.header}>
         <div className={styles.headerLeft}>
           <VscTerminal className={styles.terminalIcon} />

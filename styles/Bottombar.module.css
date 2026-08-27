@@ -46,6 +46,12 @@
   color: var(--accent-color);
 }
 
+@media screen and (max-width: 900px) {
+  .hideOnMobile {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .bottomBar {
     font-size: 0.6rem;

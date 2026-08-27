@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { VscClose } from 'react-icons/vsc';
 
 import styles from '@/styles/Tab.module.css';
 
@@ -14,14 +15,32 @@ interface TabProps {
 
 const Tab = ({ icon, filename, path }: TabProps) => {
   const pathname = usePathname();
+  const router = useRouter();
+  const isActive = pathname === path;
+
+  const handleClose = (e: React.MouseEvent | React.KeyboardEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    router.push('/');
+  };
 
   return (
     <Link href={path}>
-      <div
-        className={`${styles.tab} ${pathname === path && styles.active}`}
-      >
+      <div className={`${styles.tab} ${isActive ? styles.active : ''}`}>
         <Image src={icon} alt={filename} height={18} width={18} />
         <p>{filename}</p>
+        <span className={styles.tabAction}>
+          <span className={styles.dirtyDot} />
+          <span
+            className={styles.closeButton}
+            role="button"
+            tabIndex={-1}
+            aria-label={`Close ${filename}`}
+            onClick={handleClose}
+          >
+            <VscClose size={14} />
+          </span>
+        </span>
       </div>
     </Link>
   );

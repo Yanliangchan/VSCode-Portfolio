@@ -8,8 +8,10 @@ import Sidebar from '@/components/Sidebar';
 import Explorer from '@/components/Explorer';
 import Bottombar from '@/components/Bottombar';
 import Tabsbar from '@/components/Tabsbar';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Terminal from '@/components/Terminal';
 import CommandPalette from '@/components/CommandPalette';
+import QuickOpen from '@/components/QuickOpen';
 import MatrixRain from '@/components/MatrixRain';
 
 import styles from '@/styles/Layout.module.css';
@@ -29,6 +31,7 @@ const Layout = ({ children }: LayoutProps) => {
   const router = useRouter();
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+  const [isQuickOpenOpen, setIsQuickOpenOpen] = useState(false);
   const [chordKey, setChordKey] = useState<string | null>(null);
   const [isMatrixRainOn, setIsMatrixRainOn] = useState(false);
 
@@ -42,6 +45,14 @@ const Layout = ({ children }: LayoutProps) => {
 
   const closeCommandPalette = useCallback(() => {
     setIsCommandPaletteOpen(false);
+  }, []);
+
+  const openQuickOpen = useCallback(() => {
+    setIsQuickOpenOpen(true);
+  }, []);
+
+  const closeQuickOpen = useCallback(() => {
+    setIsQuickOpenOpen(false);
   }, []);
 
   useEffect(() => {
@@ -106,7 +117,7 @@ const Layout = ({ children }: LayoutProps) => {
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (isCommandPaletteOpen) return;
+      if (isCommandPaletteOpen || isQuickOpenOpen) return;
 
       if ((e.ctrlKey || e.metaKey) && e.key === '`') {
         e.preventDefault();
@@ -117,6 +128,12 @@ const Layout = ({ children }: LayoutProps) => {
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'p') {
         e.preventDefault();
         openCommandPalette();
+        return;
+      }
+
+      if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'p') {
+        e.preventDefault();
+        openQuickOpen();
         return;
       }
 
@@ -150,7 +167,7 @@ const Layout = ({ children }: LayoutProps) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [toggleTerminal, openCommandPalette, chordKey, router, isCommandPaletteOpen]);
+  }, [toggleTerminal, openCommandPalette, openQuickOpen, chordKey, router, isCommandPaletteOpen, isQuickOpenOpen]);
 
   return (
     <div className={styles.layout}>
@@ -160,6 +177,7 @@ const Layout = ({ children }: LayoutProps) => {
         <Explorer />
         <div className={styles.editorContainer}>
           <Tabsbar />
+          <Breadcrumbs />
           <div className={styles.editorWithTerminal}>
             <main id="main-editor" className={styles.content}>
               {children}
@@ -175,6 +193,7 @@ const Layout = ({ children }: LayoutProps) => {
         onToggleTerminal={toggleTerminal}
         isTerminalOpen={isTerminalOpen}
       />
+      <QuickOpen isOpen={isQuickOpenOpen} onClose={closeQuickOpen} />
       {isMatrixRainOn && (
         <MatrixRain onDismiss={() => setIsMatrixRainOn(false)} />
       )}

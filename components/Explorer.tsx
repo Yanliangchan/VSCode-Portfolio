@@ -5,7 +5,7 @@ import { VscChevronRight } from 'react-icons/vsc';
 
 import styles from '@/styles/Explorer.module.css';
 
-const explorerItems = [
+export const explorerItems = [
   {
     name: 'home.tsx',
     path: '/',

@@ -1,6 +1,36 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+// Best-effort per-IP rate limiting. This app runs as a single long-lived
+// Railway container (not serverless/edge functions), so an in-memory
+// window survives across requests within that process — it just resets on
+// redeploy and wouldn't be shared if this ever scales to multiple
+// replicas. That's an acceptable tradeoff for a portfolio site; a real WAF
+// (e.g. Cloudflare in front of Railway) is the stronger fix if abuse
+// becomes a real problem.
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX_REQUESTS = 120;
+const requestLog = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const windowStart = now - RATE_LIMIT_WINDOW_MS;
+  const timestamps = (requestLog.get(ip) ?? []).filter((t) => t > windowStart);
+
+  timestamps.push(now);
+  requestLog.set(ip, timestamps);
+
+  // Opportunistic cleanup so the map doesn't grow unbounded from one-off
+  // visitors — cheap relative to request volume, no separate timer needed.
+  if (requestLog.size > 5000) {
+    for (const [key, times] of requestLog) {
+      if (times.every((t) => t <= windowStart)) requestLog.delete(key);
+    }
+  }
+
+  return timestamps.length > RATE_LIMIT_MAX_REQUESTS;
+}
+
 // A per-request nonce is required so Next.js can allow its own internal
 // hydration/streaming inline scripts under a strict CSP, not just the
 // hand-written theme-restore script in app/layout.tsx — a static
@@ -9,6 +39,11 @@ import type { NextRequest } from 'next/server';
 // page into dynamic rendering (no static prerendering is possible while
 // a per-request nonce is in play).
 export function proxy(request: NextRequest) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? 'unknown';
+  if (isRateLimited(ip)) {
+    return new NextResponse('Too Many Requests', { status: 429 });
+  }
+
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
   // Only the split-editor view's iframe'd pages (?embed=1) are ever framed,
   // and only by this same site — every other response keeps 'none' so the

@@ -37,7 +37,11 @@ async function getCommits(): Promise<CommitEntry[] | null> {
   return data.map((item) => ({
     sha: item.sha,
     message: item.commit?.message?.split('\n')[0] ?? '(no message)',
-    authorName: item.commit?.author?.name ?? 'unknown',
+    // Commits are pushed through an automated (AI pair-programming)
+    // identity, so the raw git/GitHub author is never the right thing to
+    // show visitors here — this is a single-owner portfolio repo, so
+    // attribute every commit to its owner instead.
+    authorName: 'Yanliangchan',
     date: item.commit?.author?.date ?? '',
     url: item.html_url,
   }));

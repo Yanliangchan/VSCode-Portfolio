@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 
+import { useResizable } from '@/lib/useResizable';
 import styles from '@/styles/Explorer.module.css';
 
 export const explorerItems = [
@@ -92,41 +93,16 @@ const Folder = ({ label, depth, defaultOpen = true, children }: FolderProps) => 
 const MIN_WIDTH = 160;
 const MAX_WIDTH = 480;
 
+const measureWidth = (rect: DOMRect, e: MouseEvent) => e.clientX - rect.left;
+
 const Explorer = () => {
-  const [width, setWidth] = useState<number | null>(null);
-  const explorerRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault();
-    isDragging.current = true;
-    document.body.style.cursor = 'col-resize';
-    document.body.style.userSelect = 'none';
-  };
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging.current || !explorerRef.current) return;
-      const rect = explorerRef.current.getBoundingClientRect();
-      const newWidth = Math.min(MAX_WIDTH, Math.max(MIN_WIDTH, e.clientX - rect.left));
-      setWidth(newWidth);
-    };
-
-    const handleMouseUp = () => {
-      if (isDragging.current) {
-        isDragging.current = false;
-        document.body.style.cursor = '';
-        document.body.style.userSelect = '';
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, []);
+  const { size: width, elementRef: explorerRef, handleDragStart } = useResizable({
+    axis: 'horizontal',
+    min: MIN_WIDTH,
+    max: MAX_WIDTH,
+    cursor: 'col-resize',
+    measure: measureWidth,
+  });
 
   return (
     <div
@@ -161,7 +137,7 @@ const Explorer = () => {
       </Folder>
       <div
         className={styles.resizeHandle}
-        onMouseDown={handleMouseDown}
+        onMouseDown={handleDragStart}
         title="Drag to resize"
       />
     </div>

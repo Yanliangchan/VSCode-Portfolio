@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { VscTerminal, VscClose } from 'react-icons/vsc';
 
 import { THEME_KEYS, HIDDEN_THEME_KEYS } from '@/lib/themes';
+import { useResizable } from '@/lib/useResizable';
 import styles from '@/styles/Terminal.module.css';
 
 interface TerminalLine {
@@ -156,6 +157,11 @@ const processCommand = (input: string): TerminalLine[] => {
   return lines;
 };
 
+const MIN_HEIGHT = 120;
+const MAX_HEIGHT = 640;
+
+const measureHeight = (rect: DOMRect, e: MouseEvent) => rect.bottom - e.clientY;
+
 const SCAN_LINES = [
   '',
   'Starting scan...',
@@ -181,50 +187,20 @@ const Terminal = ({ onToggle }: TerminalProps) => {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [height, setHeight] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
-  const rootRef = useRef<HTMLDivElement>(null);
-  const isResizing = useRef(false);
+  const { size: height, elementRef: rootRef, handleDragStart } = useResizable({
+    axis: 'vertical',
+    min: MIN_HEIGHT,
+    max: MAX_HEIGHT,
+    cursor: 'row-resize',
+    measure: measureHeight,
+  });
 
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-  }, []);
-
-  const handleResizeStart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    isResizing.current = true;
-    document.body.style.cursor = 'row-resize';
-    document.body.style.userSelect = 'none';
-  };
-
-  useEffect(() => {
-    const MIN_HEIGHT = 120;
-    const MAX_HEIGHT = 640;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isResizing.current || !rootRef.current) return;
-      const rect = rootRef.current.getBoundingClientRect();
-      const newHeight = Math.min(MAX_HEIGHT, Math.max(MIN_HEIGHT, rect.bottom - e.clientY));
-      setHeight(newHeight);
-    };
-
-    const handleMouseUp = () => {
-      if (isResizing.current) {
-        isResizing.current = false;
-        document.body.style.cursor = '';
-        document.body.style.userSelect = '';
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-    };
   }, []);
 
   useEffect(() => {
@@ -296,7 +272,7 @@ const Terminal = ({ onToggle }: TerminalProps) => {
     >
       <div
         className={styles.resizeHandle}
-        onMouseDown={handleResizeStart}
+        onMouseDown={handleDragStart}
         title="Drag to resize"
       />
       <div className={styles.header}>

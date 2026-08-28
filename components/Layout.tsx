@@ -93,7 +93,7 @@ const Layout = ({ children }: LayoutProps) => {
           '     |_|\\__,_|_| |_||_|_|\\__,_|_| |_|\\__, |',
           '                                     |___/',
         ].join('\n'),
-      'color: #f9826c; font-family: monospace;'
+      'color: #58a6ff; font-family: monospace;'
     );
     console.log(
       "Hey, you found the console 👋\nCybersecurity enthusiast, always open to a chat: yanliangchan@gmail.com"

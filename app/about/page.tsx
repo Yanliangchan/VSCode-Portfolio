@@ -139,8 +139,9 @@ const AboutPage = () => {
                         Cyber Security Agency of Singapore
                       </p>
                       <p className={styles.expDesc}>
-                        Worked on cybersecurity projects within Singapore&apos;s
-                        national cybersecurity agency.
+                        Security consulting and VAPT (Vulnerability
+                        Assessment &amp; Penetration Testing) for CSA-approved
+                        solutions.
                       </p>
                     </div>
                   </li>
@@ -175,21 +176,6 @@ const AboutPage = () => {
                       <p className={styles.expDesc}>
                         Organised cybersecurity workshops, CTFs, and youth
                         community programmes.
-                      </p>
-                    </div>
-                  </li>
-
-                  <li className={styles.timelineItem}>
-                    <div className={styles.timelineMarker} />
-                    <div className={styles.timelineContent}>
-                      <div className={styles.timelineTop}>
-                        <h3 className={styles.expRole}>Head of Technology</h3>
-                        <span className={styles.expPeriod}>Apr 2023 — Sep 2024</span>
-                      </div>
-                      <p className={styles.expCompany}>NullSec</p>
-                      <p className={styles.expDesc}>
-                        Led the technical team organising CTFs, and developed
-                        100+ competition challenges.
                       </p>
                     </div>
                   </li>

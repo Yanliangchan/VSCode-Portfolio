@@ -138,7 +138,7 @@
   grid-column: 1;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 18px;
   min-width: 0;
 }
 
@@ -188,16 +188,23 @@
   50% { border-color: transparent; }
 }
 
-/* Section header (main column only — numbered) */
+/* Section header (main column only — numbered) — each section is styled
+   as its own folded code region: a bordered card with the "// NN Title"
+   comment as its heading, so the page reads as a sequence of distinct
+   blocks instead of continuously flowing text. */
 .section {
   position: relative;
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--explorer-border);
+  border-radius: 10px;
 }
 
 .sectionHeader {
   display: flex;
   align-items: baseline;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .sectionNumber {
@@ -205,18 +212,23 @@
   font-size: 11px;
   color: var(--syntax-comment);
   font-weight: 500;
+  font-style: italic;
 }
 
+/* Everything after "// 01" is still part of that comment line in a real
+   editor — the whole heading reads as one comment, not just the prefix. */
 .sectionTitle {
   margin: 0;
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--syntax-comment);
+  font-style: italic;
   letter-spacing: -0.01em;
 }
 
 .sectionBody {
-  padding-left: 0;
+  padding-left: 14px;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .paragraph {

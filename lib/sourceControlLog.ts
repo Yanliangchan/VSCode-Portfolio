@@ -104,6 +104,20 @@ export const commitLog: CommitEntry[] = [
     ],
   },
   {
+    id: '2022-sap-appgyver-champion',
+    year: '2022',
+    type: 'award',
+    slug: 'sap_appgyver_champion',
+    title: 'SAP AppGyver Champion',
+    description:
+      'Won SAP AppGyver Champion — built a gamified app that uses AI to incentivise recycling.',
+    meta: 'SAP, Temasek Polytechnic · Dec 2022',
+    body: [
+      'Drafted a short- and long-term business plan so the app could stay scalable and reach a larger market.',
+    ],
+    link: { href: '/about#awards', label: 'view awards' },
+  },
+  {
     id: '2023-lead',
     year: '2023',
     type: 'feat',

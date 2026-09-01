@@ -3,7 +3,8 @@ export type CommitType =
   | 'feat'
   | 'build'
   | 'test'
-  | 'chore'
+  | 'job'
+  | 'community'
   | 'docs'
   | 'release'
   | 'award'
@@ -14,7 +15,8 @@ export const COMMIT_TYPE_LABELS: Record<CommitType, string> = {
   feat: 'new chapter',
   build: 'shipped',
   test: 'competed',
-  chore: 'ongoing work',
+  job: 'day job',
+  community: 'volunteering',
   docs: 'learning',
   release: 'milestone',
   award: 'recognition',
@@ -47,8 +49,8 @@ export interface CommitEntry {
 
 export const commitLog: CommitEntry[] = [
   {
-    id: '2021-learn-python',
-    year: '2021',
+    id: '2017-learn-python',
+    year: '2017',
     type: 'init',
     slug: 'learn_python',
     title: 'Learn Python',
@@ -56,16 +58,13 @@ export const commitLog: CommitEntry[] = [
       'Started learning Python through YouTube and self-learning — the first commit in a much longer log.',
   },
   {
-    id: '2021-win-first-raspberry-pi',
+    id: '2021-top-python-course',
     year: '2021',
     type: 'award',
-    slug: 'win_first_raspberry_pi',
-    title: 'Win First Raspberry Pi',
+    slug: 'top_python_course',
+    title: 'Top the Python Course',
     description:
       "Selected for school's Python programme, topped the course, and won the final project.",
-    body: [
-      "The prize wasn't just a Raspberry Pi — it came bundled with a monitor, keyboard, mouse, and every accessory needed to turn it into a full desktop setup.",
-    ],
   },
   {
     id: '2021-build-beyond-the-code',
@@ -91,12 +90,12 @@ export const commitLog: CommitEntry[] = [
     slug: 'compete',
     title: 'Compete',
     description:
-      'Competed in Shopee Code League and other cybersecurity challenges — testing skills under pressure.',
+      'Competed in Shopee Code League, and started trying out LeetCode — testing skills under pressure.',
   },
   {
     id: '2022-teach-robotics',
     year: '2022',
-    type: 'chore',
+    type: 'job',
     slug: 'teach_robotics',
     title: 'Teach Robotics',
     description: 'Started as an educator at NK Robotics.',
@@ -125,7 +124,7 @@ export const commitLog: CommitEntry[] = [
   {
     id: '2023-serve-the-community',
     year: '2023',
-    type: 'chore',
+    type: 'community',
     slug: 'serve_the_community',
     title: 'Serve the Community',
     description:

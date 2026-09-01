@@ -3,7 +3,8 @@
   --type-feat: #c586c0;
   --type-build: #4fc1ff;
   --type-test: #f48771;
-  --type-chore: #569cd6;
+  --type-job: #569cd6;
+  --type-community: #4ec9b0;
   --type-docs: #c792ea;
   --type-release: #ce9178;
   --type-award: #dcdcaa;
@@ -175,7 +176,8 @@
 .type-feat { color: var(--type-feat); }
 .type-build { color: var(--type-build); }
 .type-test { color: var(--type-test); }
-.type-chore { color: var(--type-chore); }
+.type-job { color: var(--type-job); }
+.type-community { color: var(--type-community); }
 .type-docs { color: var(--type-docs); }
 .type-release { color: var(--type-release); }
 .type-award { color: var(--type-award); }

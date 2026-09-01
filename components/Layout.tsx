@@ -3,16 +3,16 @@
 import { useEffect, useState, useCallback } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import Titlebar from '@/components/Titlebar';
-import Sidebar from '@/components/Sidebar';
-import Explorer from '@/components/Explorer';
-import Bottombar from '@/components/Bottombar';
-import Tabsbar from '@/components/Tabsbar';
+import WindowChrome from '@/components/WindowChrome';
+import ActivityRail from '@/components/ActivityRail';
+import FileTree from '@/components/FileTree';
+import StatusLine from '@/components/StatusLine';
+import OpenFiles from '@/components/OpenFiles';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Terminal from '@/components/Terminal';
-import CommandPalette from '@/components/CommandPalette';
-import QuickOpen from '@/components/QuickOpen';
-import SplitPane from '@/components/SplitPane';
+import ActionLauncher from '@/components/ActionLauncher';
+import GoToFile from '@/components/GoToFile';
+import SplitView from '@/components/SplitView';
 import Minimap from '@/components/Minimap';
 import MatrixRain from '@/components/MatrixRain';
 
@@ -34,9 +34,9 @@ const Layout = ({ children }: LayoutProps) => {
   const searchParams = useSearchParams();
   const isEmbedded = searchParams.get('embed') === '1';
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
-  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
-  const [isQuickOpenOpen, setIsQuickOpenOpen] = useState(false);
-  const [quickOpenMode, setQuickOpenMode] = useState<'navigate' | 'split'>('navigate');
+  const [isActionLauncherOpen, setIsActionLauncherOpen] = useState(false);
+  const [isGoToFileOpen, setIsGoToFileOpen] = useState(false);
+  const [goToFileMode, setGoToFileMode] = useState<'navigate' | 'split'>('navigate');
   const [chordKey, setChordKey] = useState<string | null>(null);
   const [isMatrixRainOn, setIsMatrixRainOn] = useState(false);
   const [isZenMode, setIsZenMode] = useState(false);
@@ -46,21 +46,21 @@ const Layout = ({ children }: LayoutProps) => {
     setIsTerminalOpen(prev => !prev);
   }, []);
 
-  const openCommandPalette = useCallback(() => {
-    setIsCommandPaletteOpen(true);
+  const openActionLauncher = useCallback(() => {
+    setIsActionLauncherOpen(true);
   }, []);
 
-  const closeCommandPalette = useCallback(() => {
-    setIsCommandPaletteOpen(false);
+  const closeActionLauncher = useCallback(() => {
+    setIsActionLauncherOpen(false);
   }, []);
 
-  const openQuickOpen = useCallback((mode: 'navigate' | 'split' = 'navigate') => {
-    setQuickOpenMode(mode);
-    setIsQuickOpenOpen(true);
+  const openGoToFile = useCallback((mode: 'navigate' | 'split' = 'navigate') => {
+    setGoToFileMode(mode);
+    setIsGoToFileOpen(true);
   }, []);
 
-  const closeQuickOpen = useCallback(() => {
-    setIsQuickOpenOpen(false);
+  const closeGoToFile = useCallback(() => {
+    setIsGoToFileOpen(false);
   }, []);
 
   const toggleZenMode = useCallback(() => {
@@ -154,7 +154,7 @@ const Layout = ({ children }: LayoutProps) => {
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (isCommandPaletteOpen || isQuickOpenOpen) return;
+      if (isActionLauncherOpen || isGoToFileOpen) return;
 
       if (isZenMode && e.key === 'Escape') {
         e.preventDefault();
@@ -170,13 +170,13 @@ const Layout = ({ children }: LayoutProps) => {
 
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'p') {
         e.preventDefault();
-        openCommandPalette();
+        openActionLauncher();
         return;
       }
 
       if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'p') {
         e.preventDefault();
-        openQuickOpen();
+        openGoToFile();
         return;
       }
 
@@ -191,7 +191,7 @@ const Layout = ({ children }: LayoutProps) => {
 
       if (chordKey === 'k' && key === 't') {
         e.preventDefault();
-        openCommandPalette();
+        openActionLauncher();
         setChordKey(null);
         return;
       }
@@ -217,7 +217,7 @@ const Layout = ({ children }: LayoutProps) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [toggleTerminal, openCommandPalette, openQuickOpen, toggleZenMode, chordKey, router, isCommandPaletteOpen, isQuickOpenOpen, isZenMode]);
+  }, [toggleTerminal, openActionLauncher, openGoToFile, toggleZenMode, chordKey, router, isActionLauncherOpen, isGoToFileOpen, isZenMode]);
 
   if (isEmbedded) {
     return (
@@ -229,12 +229,12 @@ const Layout = ({ children }: LayoutProps) => {
 
   return (
     <div className={styles.layout}>
-      {!isZenMode && <Titlebar onOpenCommandPalette={openCommandPalette} />}
+      {!isZenMode && <WindowChrome onOpenCommandPalette={openActionLauncher} />}
       <div className={styles.main}>
-        {!isZenMode && <Sidebar />}
-        {!isZenMode && <Explorer />}
+        {!isZenMode && <ActivityRail />}
+        {!isZenMode && <FileTree />}
         <div className={styles.editorContainer}>
-          {!isZenMode && <Tabsbar onSplitEditor={() => openQuickOpen('split')} />}
+          {!isZenMode && <OpenFiles onSplitEditor={() => openGoToFile('split')} />}
           {!isZenMode && <Breadcrumbs />}
           <div className={styles.editorWithTerminal}>
             <div className={styles.editorRow}>
@@ -242,7 +242,7 @@ const Layout = ({ children }: LayoutProps) => {
                 {children}
               </main>
               {splitPath && !isZenMode && (
-                <SplitPane path={splitPath} onClose={closeSplit} />
+                <SplitView path={splitPath} onClose={closeSplit} />
               )}
               {!isZenMode && <Minimap />}
             </div>
@@ -251,26 +251,26 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
       </div>
       {!isZenMode && (
-        <Bottombar onTerminalToggle={toggleTerminal} isTerminalOpen={isTerminalOpen} />
+        <StatusLine onTerminalToggle={toggleTerminal} isTerminalOpen={isTerminalOpen} />
       )}
       {isZenMode && (
         <button className={styles.zenExit} onClick={toggleZenMode}>
           Exit Zen Mode (Esc)
         </button>
       )}
-      <CommandPalette
-        isOpen={isCommandPaletteOpen}
-        onClose={closeCommandPalette}
+      <ActionLauncher
+        isOpen={isActionLauncherOpen}
+        onClose={closeActionLauncher}
         onToggleTerminal={toggleTerminal}
         isTerminalOpen={isTerminalOpen}
         onToggleZenMode={toggleZenMode}
         isZenMode={isZenMode}
-        onOpenSplit={() => openQuickOpen('split')}
+        onOpenSplit={() => openGoToFile('split')}
       />
-      <QuickOpen
-        isOpen={isQuickOpenOpen}
-        onClose={closeQuickOpen}
-        mode={quickOpenMode}
+      <GoToFile
+        isOpen={isGoToFileOpen}
+        onClose={closeGoToFile}
+        mode={goToFileMode}
         onSplitSelect={openSplit}
       />
       {isMatrixRainOn && (

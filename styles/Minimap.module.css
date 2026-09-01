@@ -3,7 +3,7 @@
   width: 80px;
   flex-shrink: 0;
   background: var(--main-bg);
-  border-left: 1px solid var(--explorer-border);
+  border-left: 1px solid var(--tree-border);
   overflow: hidden;
   cursor: pointer;
 }

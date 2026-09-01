@@ -5,15 +5,15 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { VscClose } from 'react-icons/vsc';
 
-import styles from '@/styles/Tab.module.css';
+import styles from '@/styles/OpenFileTab.module.css';
 
-interface TabProps {
+interface OpenFileTabProps {
   icon: string;
   filename: string;
   path: string;
 }
 
-const Tab = ({ icon, filename, path }: TabProps) => {
+const OpenFileTab = ({ icon, filename, path }: OpenFileTabProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const isActive = pathname === path;
@@ -46,4 +46,4 @@ const Tab = ({ icon, filename, path }: TabProps) => {
   );
 };
 
-export default Tab;
+export default OpenFileTab;

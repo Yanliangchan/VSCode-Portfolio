@@ -26,7 +26,7 @@
   gap: 16px;
   margin-bottom: 24px;
   padding-bottom: 24px;
-  border-bottom: 1px solid var(--explorer-border);
+  border-bottom: 1px solid var(--tree-border);
 }
 
 .iconWrapper {
@@ -69,7 +69,7 @@
 /* Terminal window */
 .terminal {
   background: var(--terminal-bg, var(--main-bg));
-  border: 1px solid var(--terminal-border, var(--explorer-border));
+  border: 1px solid var(--terminal-border, var(--tree-border));
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
@@ -80,8 +80,8 @@
   align-items: center;
   gap: 8px;
   padding: 10px 14px;
-  background: var(--terminal-header-bg, var(--tabs-bg));
-  border-bottom: 1px solid var(--terminal-border, var(--explorer-border));
+  background: var(--terminal-header-bg, var(--tabstrip-bg));
+  border-bottom: 1px solid var(--terminal-border, var(--tree-border));
 }
 
 .terminalDot {
@@ -207,7 +207,7 @@
 .show {
   margin-top: 14px;
   padding-top: 14px;
-  border-top: 1px dashed var(--explorer-border);
+  border-top: 1px dashed var(--tree-border);
   animation: showIn 0.25s ease-out both;
 }
 
@@ -321,7 +321,7 @@
   gap: 6px 16px;
   margin-top: 18px;
   padding-top: 14px;
-  border-top: 1px solid var(--explorer-border);
+  border-top: 1px solid var(--tree-border);
 }
 
 .legendItem {

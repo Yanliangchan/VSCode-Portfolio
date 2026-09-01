@@ -6,9 +6,9 @@ import { useState } from 'react';
 import { VscChevronRight } from 'react-icons/vsc';
 
 import { useResizable } from '@/lib/useResizable';
-import styles from '@/styles/Explorer.module.css';
+import styles from '@/styles/FileTree.module.css';
 
-export const explorerItems = [
+export const fileTreeItems = [
   {
     name: 'home.tsx',
     path: '/',
@@ -95,8 +95,8 @@ const MAX_WIDTH = 480;
 
 const measureWidth = (rect: DOMRect, e: MouseEvent) => e.clientX - rect.left;
 
-const Explorer = () => {
-  const { size: width, elementRef: explorerRef, handleDragStart } = useResizable({
+const FileTree = () => {
+  const { size: width, elementRef: treeRef, handleDragStart } = useResizable({
     axis: 'horizontal',
     min: MIN_WIDTH,
     max: MAX_WIDTH,
@@ -107,13 +107,13 @@ const Explorer = () => {
   return (
     <div
       className={styles.explorer}
-      ref={explorerRef}
+      ref={treeRef}
       style={width !== null ? { width: `${width}px` } : undefined}
     >
       <p className={styles.title}>Explorer</p>
       <Folder label="Portfolio" depth={0}>
         <Folder label="pages" depth={1}>
-          {explorerItems.map((item) => (
+          {fileTreeItems.map((item) => (
             <Link href={item.path} key={item.name}>
               <div className={styles.file} style={{ paddingLeft: '2.25rem' }}>
                 <Image src={item.icon} alt={item.name} height={18} width={18} />{' '}
@@ -144,4 +144,4 @@ const Explorer = () => {
   );
 };
 
-export default Explorer;
+export default FileTree;

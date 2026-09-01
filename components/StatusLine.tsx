@@ -12,7 +12,7 @@ import {
 import { SiNextdotjs } from 'react-icons/si';
 
 import NotificationBell from '@/components/NotificationBell';
-import styles from '@/styles/Bottombar.module.css';
+import styles from '@/styles/StatusLine.module.css';
 
 const LANGUAGE_MODES: Record<string, string> = {
   '/': 'TypeScript JSX',
@@ -24,12 +24,12 @@ const LANGUAGE_MODES: Record<string, string> = {
   '/settings': 'TypeScript JSX',
 };
 
-interface BottombarProps {
+interface StatusLineProps {
   onTerminalToggle: () => void;
   isTerminalOpen: boolean;
 }
 
-const Bottombar = ({ onTerminalToggle, isTerminalOpen }: BottombarProps) => {
+const StatusLine = ({ onTerminalToggle, isTerminalOpen }: StatusLineProps) => {
   const pathname = usePathname();
   const [line, setLine] = useState(1);
 
@@ -105,4 +105,4 @@ const Bottombar = ({ onTerminalToggle, isTerminalOpen }: BottombarProps) => {
   );
 };
 
-export default Bottombar;
+export default StatusLine;

@@ -2,13 +2,13 @@
 
 import Image from 'next/image';
 
-import styles from '@/styles/Titlebar.module.css';
+import styles from '@/styles/WindowChrome.module.css';
 
-interface TitlebarProps {
+interface WindowChromeProps {
   onOpenCommandPalette?: () => void;
 }
 
-const Titlebar = ({ onOpenCommandPalette }: TitlebarProps) => {
+const WindowChrome = ({ onOpenCommandPalette }: WindowChromeProps) => {
   const handleViewClick = () => {
     if (onOpenCommandPalette) {
       onOpenCommandPalette();
@@ -43,4 +43,4 @@ const Titlebar = ({ onOpenCommandPalette }: TitlebarProps) => {
   );
 };
 
-export default Titlebar;
+export default WindowChrome;

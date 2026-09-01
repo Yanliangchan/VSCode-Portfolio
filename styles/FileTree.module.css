@@ -1,10 +1,10 @@
 .explorer {
   position: relative;
-  background: var(--explorer-bg);
+  background: var(--tree-bg);
   width: 18vw;
   color: rgb(225, 228, 232);
   font-family: var(--font-sans), sans-serif;
-  border-right: 1px solid var(--explorer-border);
+  border-right: 1px solid var(--tree-border);
   flex-shrink: 0;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .file:hover {
-  background: var(--explorer-hover-bg);
+  background: var(--tree-hover-bg);
 }
 
 .fileDisabled {

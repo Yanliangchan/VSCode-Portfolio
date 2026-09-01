@@ -25,7 +25,7 @@
 .container {
   width: 600px;
   max-width: 90vw;
-  background: var(--command-palette-bg, var(--sidebar-bg));
+  background: var(--command-palette-bg, var(--rail-bg));
   border-radius: 6px;
   box-shadow: 0 0 0 1px var(--command-palette-border, var(--border-color)),
               0 4px 16px rgba(0, 0, 0, 0.5);
@@ -100,7 +100,7 @@
   font-weight: 600;
   text-transform: uppercase;
   color: var(--text-color-muted, #6e7681);
-  background: var(--command-palette-bg, var(--sidebar-bg));
+  background: var(--command-palette-bg, var(--rail-bg));
   letter-spacing: 0.5px;
 }
 
@@ -181,7 +181,7 @@
   align-items: center;
   gap: 16px;
   padding: 8px 16px;
-  background: var(--command-palette-bg, var(--sidebar-bg));
+  background: var(--command-palette-bg, var(--rail-bg));
   border-top: 1px solid var(--command-palette-border, var(--border-color));
   font-size: 11px;
   color: var(--text-color-muted, #6e7681);

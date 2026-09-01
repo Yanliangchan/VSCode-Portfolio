@@ -3,7 +3,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  border-left: 1px solid var(--explorer-border);
+  border-left: 1px solid var(--tree-border);
   background: var(--main-bg);
 }
 
@@ -14,8 +14,8 @@
   padding: 0 0.75rem;
   height: 32px;
   flex-shrink: 0;
-  background: var(--tabs-bg);
-  border-bottom: 1px solid var(--explorer-border);
+  background: var(--tabstrip-bg);
+  border-bottom: 1px solid var(--tree-border);
   font-family: var(--font-sans), sans-serif;
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.7);

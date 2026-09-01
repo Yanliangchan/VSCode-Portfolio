@@ -7,7 +7,7 @@ import { MdNavigateNext } from 'react-icons/md';
 
 import { THEMES } from '@/lib/themes';
 import { fuzzyScore, fuzzyFilter } from '@/lib/fuzzyMatch';
-import styles from '@/styles/CommandPalette.module.css';
+import styles from '@/styles/ActionLauncher.module.css';
 
 interface Command {
   id: string;
@@ -18,7 +18,7 @@ interface Command {
   action: () => void;
 }
 
-interface CommandPaletteProps {
+interface ActionLauncherProps {
   isOpen: boolean;
   onClose: () => void;
   onToggleTerminal: () => void;
@@ -28,7 +28,7 @@ interface CommandPaletteProps {
   onOpenSplit?: () => void;
 }
 
-const CommandPalette = ({
+const ActionLauncher = ({
   isOpen,
   onClose,
   onToggleTerminal,
@@ -36,7 +36,7 @@ const CommandPalette = ({
   onToggleZenMode,
   isZenMode,
   onOpenSplit,
-}: CommandPaletteProps) => {
+}: ActionLauncherProps) => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -366,4 +366,4 @@ const CommandPalette = ({
   );
 };
 
-export default CommandPalette;
+export default ActionLauncher;

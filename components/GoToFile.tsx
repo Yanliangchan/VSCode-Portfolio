@@ -5,25 +5,25 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { VscGoToFile } from 'react-icons/vsc';
 
-import { explorerItems } from '@/components/Explorer';
+import { fileTreeItems } from '@/components/FileTree';
 import { fuzzyFilter } from '@/lib/fuzzyMatch';
-import styles from '@/styles/CommandPalette.module.css';
+import styles from '@/styles/ActionLauncher.module.css';
 
-interface QuickOpenProps {
+interface GoToFileProps {
   isOpen: boolean;
   onClose: () => void;
   mode?: 'navigate' | 'split';
   onSplitSelect?: (path: string) => void;
 }
 
-const QuickOpen = ({ isOpen, onClose, mode = 'navigate', onSplitSelect }: QuickOpenProps) => {
+const GoToFile = ({ isOpen, onClose, mode = 'navigate', onSplitSelect }: GoToFileProps) => {
   const router = useRouter();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
-  const filtered = fuzzyFilter(explorerItems, query, (item) => item.name);
+  const filtered = fuzzyFilter(fileTreeItems, query, (item) => item.name);
 
   const handleSelect = useCallback(
     (index: number) => {
@@ -147,4 +147,4 @@ const QuickOpen = ({ isOpen, onClose, mode = 'navigate', onSplitSelect }: QuickO
   );
 };
 
-export default QuickOpen;
+export default GoToFile;

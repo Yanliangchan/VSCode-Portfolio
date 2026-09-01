@@ -3,8 +3,8 @@
   align-items: center;
   gap: 6px;
   padding: 4px 14px;
-  background: var(--tabs-bg);
-  border-bottom: 1px solid var(--explorer-border);
+  background: var(--tabstrip-bg);
+  border-bottom: 1px solid var(--tree-border);
   font-family: var(--font-sans), sans-serif;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);

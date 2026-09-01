@@ -1,5 +1,5 @@
 .titlebar {
-  background: var(--titlebar-bg);
+  background: var(--chrome-bg);
   height: 30px;
   padding: 0 0.5rem;
   display: flex;

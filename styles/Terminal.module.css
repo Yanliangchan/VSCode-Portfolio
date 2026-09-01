@@ -6,7 +6,7 @@
   min-height: 150px;
   flex-shrink: 0;
   background: var(--terminal-bg, var(--main-bg));
-  border-top: 1px solid var(--terminal-border, var(--bottombar-border));
+  border-top: 1px solid var(--terminal-border, var(--statusline-border));
   font-family: 'JetBrains Mono', monospace;
 }
 
@@ -30,8 +30,8 @@
   align-items: center;
   padding: 0 0.5rem;
   height: 32px;
-  background: var(--terminal-header-bg, var(--tabs-bg));
-  border-bottom: 1px solid var(--terminal-border, var(--bottombar-border));
+  background: var(--terminal-header-bg, var(--tabstrip-bg));
+  border-bottom: 1px solid var(--terminal-border, var(--statusline-border));
   color: var(--text-color);
   font-size: 0.85rem;
   user-select: none;
@@ -68,7 +68,7 @@
 }
 
 .headerBtn:hover {
-  background: var(--bottombar-hover-bg);
+  background: var(--statusline-hover-bg);
 }
 
 .body {

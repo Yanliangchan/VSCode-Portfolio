@@ -38,8 +38,8 @@
   max-height: 320px;
   display: flex;
   flex-direction: column;
-  background: var(--sidebar-bg);
-  border: 1px solid var(--explorer-border);
+  background: var(--rail-bg);
+  border: 1px solid var(--tree-border);
   border-radius: 6px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
   font-family: var(--font-sans), sans-serif;
@@ -54,7 +54,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 12px;
-  border-bottom: 1px solid var(--explorer-border);
+  border-bottom: 1px solid var(--tree-border);
   font-weight: 600;
 }
 
@@ -78,7 +78,7 @@
 
 .item {
   padding: 10px 12px;
-  border-bottom: 1px solid var(--explorer-border);
+  border-bottom: 1px solid var(--tree-border);
   line-height: 1.5;
 }
 

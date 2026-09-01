@@ -2,16 +2,16 @@
 
 import { VscClose, VscSplitHorizontal } from 'react-icons/vsc';
 
-import { explorerItems } from '@/components/Explorer';
-import styles from '@/styles/SplitPane.module.css';
+import { fileTreeItems } from '@/components/FileTree';
+import styles from '@/styles/SplitView.module.css';
 
-interface SplitPaneProps {
+interface SplitViewProps {
   path: string;
   onClose: () => void;
 }
 
-const SplitPane = ({ path, onClose }: SplitPaneProps) => {
-  const file = explorerItems.find((item) => item.path === path);
+const SplitView = ({ path, onClose }: SplitViewProps) => {
+  const file = fileTreeItems.find((item) => item.path === path);
 
   return (
     <div className={styles.splitPane}>
@@ -33,4 +33,4 @@ const SplitPane = ({ path, onClose }: SplitPaneProps) => {
   );
 };
 
-export default SplitPane;
+export default SplitView;

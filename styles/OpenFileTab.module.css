@@ -1,10 +1,10 @@
 .tab {
   padding: 0.5rem 0.6rem 0.5rem 1.25rem;
-  background: var(--tab-bg);
+  background: var(--tabstrip-item-bg);
   color: #ececec;
   display: flex;
   align-items: center;
-  border: 1px solid var(--tab-border);
+  border: 1px solid var(--tabstrip-item-border);
   font-family: var(--font-sans), sans-serif;
   font-size: 0.9rem;
   cursor: pointer;
@@ -16,7 +16,7 @@
 
 .active {
   border-top: 1px solid var(--accent-color);
-  background: var(--tab-active-bg);
+  background: var(--tabstrip-item-active-bg);
   border-bottom: none;
 }
 

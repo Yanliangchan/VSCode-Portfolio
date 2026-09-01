@@ -14,9 +14,9 @@ import {
   VscExtensions,
 } from 'react-icons/vsc';
 
-import styles from '@/styles/Sidebar.module.css';
+import styles from '@/styles/ActivityRail.module.css';
 
-const sidebarTopItems = [
+const railTopItems = [
   { Icon: VscFiles, path: '/' },
   { Icon: VscSourceControl, path: '/source-control' },
   { Icon: VscExtensions, path: '/extensions' },
@@ -26,18 +26,18 @@ const sidebarTopItems = [
   { Icon: VscMail, path: '/contact' },
 ];
 
-const sidebarBottomItems = [
+const railBottomItems = [
   { Icon: VscAccount, path: '/about' },
   { Icon: VscSettings, path: '/settings' },
 ];
 
-const Sidebar = () => {
+const ActivityRail = () => {
   const pathname = usePathname();
 
   return (
     <aside className={styles.sidebar}>
       <div className={styles.sidebarTop}>
-        {sidebarTopItems.map(({ Icon, path }) => (
+        {railTopItems.map(({ Icon, path }) => (
           <Link href={path} key={path}>
             <div
               className={`${styles.iconContainer} ${
@@ -58,7 +58,7 @@ const Sidebar = () => {
         ))}
       </div>
       <div className={styles.sidebarBottom}>
-        {sidebarBottomItems.map(({ Icon, path }) => (
+        {railBottomItems.map(({ Icon, path }) => (
           <div className={styles.iconContainer} key={path}>
             <Link href={path}>
               <Icon
@@ -77,4 +77,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default ActivityRail;

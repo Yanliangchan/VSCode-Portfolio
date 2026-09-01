@@ -12,6 +12,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import Terminal from '@/components/Terminal';
 import ActionLauncher from '@/components/ActionLauncher';
 import GoToFile from '@/components/GoToFile';
+import FindBar from '@/components/FindBar';
 import SplitView from '@/components/SplitView';
 import Minimap from '@/components/Minimap';
 import MatrixRain from '@/components/MatrixRain';
@@ -37,6 +38,7 @@ const Layout = ({ children }: LayoutProps) => {
   const [isActionLauncherOpen, setIsActionLauncherOpen] = useState(false);
   const [isGoToFileOpen, setIsGoToFileOpen] = useState(false);
   const [goToFileMode, setGoToFileMode] = useState<'navigate' | 'split'>('navigate');
+  const [isFindBarOpen, setIsFindBarOpen] = useState(false);
   const [chordKey, setChordKey] = useState<string | null>(null);
   const [isMatrixRainOn, setIsMatrixRainOn] = useState(false);
   const [isZenMode, setIsZenMode] = useState(false);
@@ -61,6 +63,14 @@ const Layout = ({ children }: LayoutProps) => {
 
   const closeGoToFile = useCallback(() => {
     setIsGoToFileOpen(false);
+  }, []);
+
+  const openFindBar = useCallback(() => {
+    setIsFindBarOpen(true);
+  }, []);
+
+  const closeFindBar = useCallback(() => {
+    setIsFindBarOpen(false);
   }, []);
 
   const toggleZenMode = useCallback(() => {
@@ -90,6 +100,10 @@ const Layout = ({ children }: LayoutProps) => {
     } else {
       main.scrollTop = 0;
     }
+
+    // Matches are page-specific — don't carry stale highlights/results
+    // over to whatever page is navigated to next.
+    setIsFindBarOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -162,6 +176,22 @@ const Layout = ({ children }: LayoutProps) => {
         return;
       }
 
+      if (isFindBarOpen && e.key === 'Escape') {
+        closeFindBar();
+        return;
+      }
+
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
+        if (e.target instanceof Element && e.target.closest('input, textarea')) {
+          // Don't steal focus from the terminal input or other fields —
+          // the browser's native find still works there as a fallback.
+          return;
+        }
+        e.preventDefault();
+        openFindBar();
+        return;
+      }
+
       if ((e.ctrlKey || e.metaKey) && e.key === '`') {
         e.preventDefault();
         toggleTerminal();
@@ -217,7 +247,7 @@ const Layout = ({ children }: LayoutProps) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [toggleTerminal, openActionLauncher, openGoToFile, toggleZenMode, chordKey, router, isActionLauncherOpen, isGoToFileOpen, isZenMode]);
+  }, [toggleTerminal, openActionLauncher, openGoToFile, openFindBar, closeFindBar, toggleZenMode, chordKey, router, isActionLauncherOpen, isGoToFileOpen, isFindBarOpen, isZenMode]);
 
   if (isEmbedded) {
     return (
@@ -241,6 +271,7 @@ const Layout = ({ children }: LayoutProps) => {
               <main id="main-editor" className={styles.content}>
                 {children}
               </main>
+              <FindBar isOpen={isFindBarOpen} onClose={closeFindBar} />
               {splitPath && !isZenMode && (
                 <SplitView path={splitPath} onClose={closeSplit} />
               )}

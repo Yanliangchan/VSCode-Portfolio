@@ -1,0 +1,75 @@
+.bar {
+  position: absolute;
+  top: 12px;
+  right: 24px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px;
+  background: var(--chrome-bg, var(--main-bg));
+  border: 1px solid var(--tree-border);
+  border-radius: 6px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  font-family: var(--font-mono), monospace;
+  font-size: 13px;
+}
+
+.input {
+  width: 160px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--tree-border);
+  border-radius: 4px;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--accent-color);
+}
+
+.count {
+  min-width: 64px;
+  padding: 0 6px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+}
+
+.iconButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-color);
+}
+
+.iconButton.active {
+  color: var(--accent-color);
+  background: rgba(var(--accent-color-rgb), 0.15);
+}
+
+@media screen and (max-width: 600px) {
+  .bar {
+    right: 8px;
+    left: 8px;
+  }
+
+  .input {
+    width: auto;
+    flex: 1;
+  }
+}

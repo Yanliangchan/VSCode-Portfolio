@@ -104,7 +104,7 @@ const AboutPage = () => {
             </section>
 
             {/* Experience */}
-            <section className={`${styles.section} ${styles.reveal}`} data-reveal>
+            <section id="experience" className={`${styles.section} ${styles.reveal}`} data-reveal>
               <div className={styles.sectionHeader}>
                 <span className={styles.sectionNumber}>// 02</span>
                 <h2 className={styles.sectionTitle}>Experience</h2>
@@ -184,7 +184,7 @@ const AboutPage = () => {
             </section>
 
             {/* Education */}
-            <section className={`${styles.section} ${styles.reveal}`} data-reveal>
+            <section id="education" className={`${styles.section} ${styles.reveal}`} data-reveal>
               <div className={styles.sectionHeader}>
                 <span className={styles.sectionNumber}>// 03</span>
                 <h2 className={styles.sectionTitle}>Education</h2>
@@ -336,7 +336,7 @@ const AboutPage = () => {
               </div>
             </div>
 
-            <div className={`${styles.sidebarSection} ${styles.reveal}`} data-reveal>
+            <div id="awards" className={`${styles.sidebarSection} ${styles.reveal}`} data-reveal>
               <h4 className={styles.sidebarHeading}>Awards</h4>
               <div className={styles.metaList}>
                 <div className={styles.metaListItem}>

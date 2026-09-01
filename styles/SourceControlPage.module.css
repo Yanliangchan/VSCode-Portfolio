@@ -1,10 +1,19 @@
 .page {
+  --type-feat: #c586c0;
+  --type-feat-rgb: 197, 134, 192;
+  --type-release: #ce9178;
+  --type-release-rgb: 206, 145, 120;
+  --type-award: #dcdcaa;
+  --type-award-rgb: 220, 220, 170;
+  --type-refactor: #9cdcfe;
+  --type-refactor-rgb: 156, 220, 254;
+
   width: 100%;
   background: var(--main-bg);
 }
 
 .container {
-  max-width: 720px;
+  max-width: 880px;
   width: 100%;
   margin: 0 auto;
   padding: 40px;
@@ -13,7 +22,7 @@
 .header {
   display: flex;
   gap: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   padding-bottom: 24px;
   border-bottom: 1px solid var(--explorer-border);
 }
@@ -55,89 +64,230 @@
   color: rgba(255, 255, 255, 0.55);
 }
 
-.error {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 14px;
+/* Terminal window */
+.terminal {
+  background: var(--terminal-bg, var(--main-bg));
+  border: 1px solid var(--terminal-border, var(--explorer-border));
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
 }
 
-.commitList {
+.terminalHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--terminal-header-bg, var(--tabs-bg));
+  border-bottom: 1px solid var(--terminal-border, var(--explorer-border));
+}
+
+.terminalDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.terminalTitle {
+  margin-left: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.terminalBody {
+  padding: 20px 22px 26px;
+  font-family: var(--font-mono), monospace;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.commandLine {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.prompt {
+  color: var(--accent-color);
+  flex-shrink: 0;
+}
+
+.command {
+  color: var(--text-color);
+}
+
+/* git log */
+.log {
   list-style: none;
-  margin: 0;
+  margin: 10px 0 0 0;
   padding: 0;
 }
 
-.commit {
-  position: relative;
+.logLine {
   display: flex;
+  align-items: baseline;
   gap: 12px;
-  padding: 0 0 18px 0;
+  width: 100%;
+  padding: 3px 8px;
+  margin-left: -8px;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: inherit;
+  transition: background 0.15s ease;
 }
 
-.commit::before {
-  content: '';
-  position: absolute;
-  left: 8px;
-  top: 20px;
-  bottom: 0;
-  width: 1px;
-  background: var(--explorer-border);
+.logLine:hover {
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.commit:last-child::before {
-  display: none;
+.logLineActive {
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.commitIcon {
+.logYear {
   flex-shrink: 0;
-  width: 17px;
-  height: 17px;
-  color: var(--accent-color);
-  background: var(--main-bg);
-  z-index: 1;
+  width: 36px;
+  color: rgba(255, 255, 255, 0.35);
 }
 
-.commitBody {
-  flex: 1;
-  min-width: 0;
-  padding-bottom: 2px;
+.logType {
+  flex-shrink: 0;
+  font-weight: 600;
 }
 
-.commitMessage {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+.logSlug {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.logLine:hover .logSlug,
+.logLineActive .logSlug {
   color: var(--text-color);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
 }
 
-.commitMessage:hover {
-  color: var(--accent-color);
-}
+.type-feat { color: var(--type-feat); }
+.type-release { color: var(--type-release); }
+.type-award { color: var(--type-award); }
+.type-refactor { color: var(--type-refactor); }
 
-.commitLinkIcon {
-  opacity: 0.5;
-  flex-shrink: 0;
-}
-
-.commitMeta {
+/* HEAD marker */
+.headLine {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
-  margin-top: 4px;
+  margin: 8px 0 4px -8px;
+  padding: 3px 8px;
+  color: rgba(255, 255, 255, 0.35);
+  font-style: italic;
+}
+
+.headBadge {
+  flex-shrink: 0;
+  color: var(--syntax-type, #4ec9b0);
+}
+
+.headMessage {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* git show */
+.show {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--explorer-border);
+  animation: showIn 0.25s ease-out both;
+}
+
+@keyframes showIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.showBody {
+  margin: 10px 0 4px 0;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 2px solid var(--accent-color);
+  border-radius: 0 6px 6px 0;
+}
+
+.showCommitLine {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.4);
-  font-family: var(--font-mono);
+  margin-bottom: 10px;
 }
 
-.sha {
+.showTitle {
+  margin: 0 0 6px 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-color);
+  font-family: var(--font-sans), sans-serif;
+}
+
+.showDescription {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-sans), sans-serif;
+}
+
+.showLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
   color: var(--accent-color);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: gap 0.2s ease;
+}
+
+.showLink:hover {
+  gap: 7px;
+}
+
+/* Idle cursor */
+.cursor {
+  display: inline-block;
+  width: 7px;
+  height: 15px;
+  background: var(--accent-color);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .show {
+    animation: none;
+  }
+
+  .cursor {
+    animation: none;
+  }
 }
 
 @media (max-width: 640px) {
   .container {
     padding: 24px;
+  }
+
+  .terminalBody {
+    padding: 16px 14px 20px;
+    font-size: 12.5px;
+  }
+
+  .logYear {
+    width: 30px;
   }
 }

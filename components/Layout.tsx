@@ -77,7 +77,17 @@ const Layout = ({ children }: LayoutProps) => {
 
   useEffect(() => {
     const main = document.getElementById('main-editor');
-    if (main) {
+    if (!main) return;
+
+    // #main-editor is its own scroll container, not the window, so the
+    // browser's native hash-scroll (which targets window scroll) never
+    // reaches it — scroll the target into view within it manually instead.
+    const hash = window.location.hash.slice(1);
+    const target = hash ? document.getElementById(hash) : null;
+
+    if (target) {
+      requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+    } else {
       main.scrollTop = 0;
     }
   }, [pathname]);

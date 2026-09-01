@@ -93,8 +93,8 @@
   --main-bg: #1f2430;
   --bg-text: #21242b;
   --text-color: #efefef;
-  --accent-color: #e6b450;
-  --accent-color-rgb: 230, 180, 80;
+  --accent-color: #ffcc66;
+  --accent-color-rgb: 255, 204, 102;
   --chrome-bg: #1f2428;
   --rail-bg: #1f2430;
   --rail-hover-bg: #191e2a;
@@ -107,7 +107,7 @@
   --tabstrip-item-border: transparent;
   --statusline-bg: #1f2430;
   --statusline-border: transparent;
-  --button-bg: #e6b450;
+  --button-bg: #ffcc66;
   --button-text: #1f2430;
   --statusline-hover-bg: #4f4f52;
   --scrollbar-track-bg: #1f2430;
@@ -152,7 +152,7 @@
 [data-theme='night-owl'] {
   --main-bg: #011627;
   --bg-text: #031d33;
-  --text-color: #89a4bb;
+  --text-color: #d6deeb;
   --accent-color: rgb(95, 126, 151);
   --accent-color-rgb: 95, 126, 151;
   --chrome-bg: #011627;

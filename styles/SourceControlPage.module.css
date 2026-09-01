@@ -1,12 +1,13 @@
 .page {
+  --type-init: #6a9955;
   --type-feat: #c586c0;
-  --type-feat-rgb: 197, 134, 192;
+  --type-build: #4fc1ff;
+  --type-test: #f48771;
+  --type-chore: #569cd6;
+  --type-docs: #c792ea;
   --type-release: #ce9178;
-  --type-release-rgb: 206, 145, 120;
   --type-award: #dcdcaa;
-  --type-award-rgb: 220, 220, 170;
   --type-refactor: #9cdcfe;
-  --type-refactor-rgb: 156, 220, 254;
 
   width: 100%;
   background: var(--main-bg);
@@ -170,7 +171,12 @@
   color: var(--text-color);
 }
 
+.type-init { color: var(--type-init); }
 .type-feat { color: var(--type-feat); }
+.type-build { color: var(--type-build); }
+.type-test { color: var(--type-test); }
+.type-chore { color: var(--type-chore); }
+.type-docs { color: var(--type-docs); }
 .type-release { color: var(--type-release); }
 .type-award { color: var(--type-award); }
 .type-refactor { color: var(--type-refactor); }
@@ -230,12 +236,109 @@
   font-family: var(--font-sans), sans-serif;
 }
 
+.showMeta {
+  margin: 0 0 10px 0;
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-mono), monospace;
+}
+
 .showDescription {
   margin: 0;
   font-size: 13.5px;
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.7);
   font-family: var(--font-sans), sans-serif;
+}
+
+.showParagraph {
+  margin: 10px 0 0 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-sans), sans-serif;
+}
+
+/* A nested "command" run inside the show output — e.g. `ls roles/`,
+   `cat reflection.txt` — reinforcing the terminal metaphor for
+   structured content instead of just more prose. */
+.subCommand {
+  margin-top: 14px;
+}
+
+.subCommand .commandLine {
+  font-size: 12.5px;
+  opacity: 0.85;
+}
+
+.listing {
+  list-style: none;
+  margin: 6px 0 0 0;
+  padding: 0;
+}
+
+.listingItem {
+  display: flex;
+  gap: 12px;
+  padding: 2px 0;
+  font-size: 12.5px;
+}
+
+.listingName {
+  flex-shrink: 0;
+  width: 110px;
+  color: var(--accent-color);
+}
+
+.listingDesc {
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-sans), sans-serif;
+}
+
+.quote {
+  margin: 8px 0 0 0;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 2px solid var(--syntax-comment, #6a9955);
+  border-radius: 0 6px 6px 0;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.summaryLine {
+  margin: 4px 0 0 0;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--explorer-border);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.legendDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.legendLabel {
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .showLink {

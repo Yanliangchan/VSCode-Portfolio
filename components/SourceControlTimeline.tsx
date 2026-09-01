@@ -4,8 +4,11 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { VscTerminal, VscArrowRight } from 'react-icons/vsc';
 
-import { commitLog, type CommitEntry } from '@/lib/sourceControlLog';
+import { commitLog, COMMIT_TYPE_LABELS, type CommitEntry, type CommitType } from '@/lib/sourceControlLog';
 import styles from '@/styles/SourceControlPage.module.css';
+
+const TYPES_USED = Array.from(new Set(commitLog.map((c) => c.type))) as CommitType[];
+const FIRST_YEAR = commitLog[0].year;
 
 const SourceControlTimeline = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -21,7 +24,7 @@ const SourceControlTimeline = () => {
           <div className={styles.headerContent}>
             <h1 className={styles.title}>Source Control</h1>
             <p className={styles.subtitle}>
-              My story, versioned. Click a commit to see the full diff.
+              My story, versioned. Click a commit to run its diff.
             </p>
           </div>
         </header>
@@ -77,11 +80,45 @@ const SourceControlTimeline = () => {
                 <div className={styles.showBody}>
                   <div className={styles.showCommitLine}>
                     commit{' '}
-                    <span className={`${styles[`type-${selected.type}`]}`}>{selected.id}</span>
+                    <span className={styles[`type-${selected.type}`]}>{selected.id}</span>
                   </div>
 
                   <h2 className={styles.showTitle}>{selected.title}</h2>
+                  {selected.meta && <p className={styles.showMeta}>{selected.meta}</p>}
                   <p className={styles.showDescription}>{selected.description}</p>
+
+                  {selected.body?.map((paragraph, i) => (
+                    <p className={styles.showParagraph} key={i}>
+                      {paragraph}
+                    </p>
+                  ))}
+
+                  {selected.list && (
+                    <div className={styles.subCommand}>
+                      <div className={styles.commandLine}>
+                        <span className={styles.prompt}>$</span>
+                        <span className={styles.command}>ls {selected.list.label}/</span>
+                      </div>
+                      <ul className={styles.listing}>
+                        {selected.list.items.map((item) => (
+                          <li className={styles.listingItem} key={item.name}>
+                            <span className={styles.listingName}>{item.name}</span>
+                            <span className={styles.listingDesc}>{item.description}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {selected.quote && (
+                    <div className={styles.subCommand}>
+                      <div className={styles.commandLine}>
+                        <span className={styles.prompt}>$</span>
+                        <span className={styles.command}>cat {selected.quote.file}</span>
+                      </div>
+                      <blockquote className={styles.quote}>{selected.quote.text}</blockquote>
+                    </div>
+                  )}
 
                   {selected.link && (
                     <Link href={selected.link.href} className={styles.showLink}>
@@ -91,6 +128,23 @@ const SourceControlTimeline = () => {
                 </div>
               </div>
             )}
+
+            <div className={styles.commandLine}>
+              <span className={styles.prompt}>$</span>
+              <span className={styles.command}>git shortlog -s | wc -l</span>
+            </div>
+            <div className={styles.summaryLine}>
+              {commitLog.length} commits since {FIRST_YEAR}
+            </div>
+
+            <div className={styles.legend}>
+              {TYPES_USED.map((type) => (
+                <span className={styles.legendItem} key={type}>
+                  <span className={`${styles.legendDot} ${styles[`type-${type}`]}`} />
+                  {type} <span className={styles.legendLabel}>· {COMMIT_TYPE_LABELS[type]}</span>
+                </span>
+              ))}
+            </div>
 
             <div className={styles.commandLine}>
               <span className={styles.prompt}>$</span>

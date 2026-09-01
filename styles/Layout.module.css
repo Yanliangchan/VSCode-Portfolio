@@ -38,6 +38,13 @@
   padding: 2rem;
   color: var(--text-color);
   font-family: var(--font-mono), monospace;
+  /* editor.fontSize scales the whole editor pane via zoom rather than
+     font-size — most page CSS uses fixed px text sizes, so a plain
+     font-size change on this wrapper wouldn't cascade into anything
+     (font-size inheritance only affects descendants using relative
+     units). zoom scales the rendered content itself, matching how the
+     real setting visibly changes VS Code's editor. */
+  zoom: calc(var(--content-font-size, 14) / 14);
   flex: 1;
   min-width: 0;
   overflow-y: auto;

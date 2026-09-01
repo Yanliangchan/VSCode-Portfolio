@@ -14,3 +14,26 @@ body {
 a {
   text-decoration: none;
 }
+
+/* workbench.reduceMotion (see app/settings/page.tsx) — a manual override
+   on top of the OS-level preference below, so visitors can turn off
+   motion here even when their system preference doesn't say to. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+[data-reduce-motion='true'] *,
+[data-reduce-motion='true'] *::before,
+[data-reduce-motion='true'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}

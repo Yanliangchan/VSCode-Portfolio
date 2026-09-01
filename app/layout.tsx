@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import { JetBrains_Mono, Source_Sans_3 } from 'next/font/google';
 
 import Layout from '@/components/Layout';
+import { SettingsProvider } from '@/lib/SettingsContext';
 
 import '@/styles/globals.css';
 import '@/styles/themes.css';
@@ -57,6 +58,14 @@ const themeScript = `
     if (theme) {
       document.documentElement.setAttribute('data-theme', theme);
     }
+    const fontSize = localStorage.getItem('settings.fontSize');
+    if (fontSize) {
+      document.documentElement.style.setProperty('--content-font-size', fontSize);
+    }
+    const reduceMotion = localStorage.getItem('settings.reduceMotion');
+    if (reduceMotion) {
+      document.documentElement.setAttribute('data-reduce-motion', reduceMotion);
+    }
   })();
 `;
 
@@ -73,7 +82,9 @@ export default async function RootLayout({
         <script nonce={nonce} dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={`${jetbrainsMono.variable} ${sourceSans.variable}`}>
-        <Layout>{children}</Layout>
+        <SettingsProvider>
+          <Layout>{children}</Layout>
+        </SettingsProvider>
       </body>
     </html>
   );

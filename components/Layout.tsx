@@ -16,6 +16,7 @@ import FindBar from '@/components/FindBar';
 import SplitView from '@/components/SplitView';
 import Minimap from '@/components/Minimap';
 import MatrixRain from '@/components/MatrixRain';
+import { useSettings } from '@/lib/SettingsContext';
 
 import styles from '@/styles/Layout.module.css';
 
@@ -43,6 +44,7 @@ const Layout = ({ children }: LayoutProps) => {
   const [isMatrixRainOn, setIsMatrixRainOn] = useState(false);
   const [isZenMode, setIsZenMode] = useState(false);
   const [splitPath, setSplitPath] = useState<string | null>(null);
+  const { minimapEnabled } = useSettings();
 
   const toggleTerminal = useCallback(() => {
     setIsTerminalOpen(prev => !prev);
@@ -275,7 +277,7 @@ const Layout = ({ children }: LayoutProps) => {
               {splitPath && !isZenMode && (
                 <SplitView path={splitPath} onClose={closeSplit} />
               )}
-              {!isZenMode && <Minimap />}
+              {!isZenMode && minimapEnabled && <Minimap />}
             </div>
             {isTerminalOpen && <Terminal onToggle={toggleTerminal} />}
           </div>

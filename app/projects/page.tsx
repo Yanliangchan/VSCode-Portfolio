@@ -12,6 +12,8 @@ export const metadata: Metadata = {
 
 const ProjectsPage = () => {
   const totalProjects = projects.length;
+  const workProjects = projects.filter((p) => p.tier !== 'game');
+  const gameProjects = projects.filter((p) => p.tier === 'game');
 
   return (
     <div className={styles.page}>
@@ -25,25 +27,32 @@ const ProjectsPage = () => {
               <span className={styles.count}>{totalProjects} Projects</span>
             </div>
           </div>
-          
+
           <div className={styles.headerContent}>
             <h1 className={styles.title}>Featured Work</h1>
             <p className={styles.subtitle}>
-              A curated collection of projects I&apos;ve built. Each represents 
+              A collection of projects I&apos;ve built. Each represents
               a unique challenge and learning experience.
             </p>
           </div>
         </header>
 
-        <div className={styles.timeline}>
-          {projects.map((project, index) => (
-            <ProjectCard 
-              key={project.slug} 
-              project={project}
-              index={index + 1}
-            />
+        <div className={styles.grid}>
+          {workProjects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
+
+        {gameProjects.length > 0 && (
+          <section className={styles.gamesSection}>
+            <h2 className={styles.gamesSectionTitle}>Side Projects</h2>
+            <div className={styles.grid}>
+              {gameProjects.map((project) => (
+                <ProjectCard key={project.slug} project={project} />
+              ))}
+            </div>
+          </section>
+        )}
 
         <footer className={styles.footer}>
           <div className={styles.footerLine} />

@@ -6,7 +6,7 @@
 }
 
 .container {
-  max-width: 640px;
+  max-width: 860px;
   width: 100%;
   margin: 0 auto;
   padding: 48px 32px;
@@ -75,27 +75,27 @@
   max-width: 480px;
 }
 
-/* Timeline */
-.timeline {
-  position: relative;
-  padding-left: 28px;
+/* Projects grid — equal-weight cards, no ranking implied */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
 }
 
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 8px;
-  bottom: 8px;
-  width: 1px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    var(--accent-color) 10%,
-    var(--accent-color) 90%,
-    transparent
-  );
-  opacity: 0.3;
+.gamesSection {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--tree-border);
+}
+
+.gamesSectionTitle {
+  margin: 0 0 16px 0;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
 }
 
 /* Footer */
@@ -160,11 +160,7 @@
     font-size: 14px;
   }
 
-  .timeline {
-    padding-left: 0;
-  }
-
-  .timeline::before {
-    display: none;
+  .grid {
+    grid-template-columns: 1fr;
   }
 }

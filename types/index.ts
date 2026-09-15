@@ -4,6 +4,10 @@ export interface Project {
   logo: string;
   link: string;
   slug: string;
+  /** 'game' ranks lower on the Projects page and shows `disclaimer`. */
+  tier?: 'work' | 'game';
+  /** Shown on 'game' projects — e.g. fan-made/unofficial, sourcing notes. */
+  disclaimer?: string;
 }
 
 export interface Repo {

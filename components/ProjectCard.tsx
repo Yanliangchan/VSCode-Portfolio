@@ -35,9 +35,16 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
               />
             </div>
             <h3 className={styles.title}>{project.title}</h3>
+            {project.tier === 'game' && (
+              <span className={styles.badge}>Fan Project</span>
+            )}
           </div>
-          
+
           <p className={styles.description}>{project.description}</p>
+
+          {project.disclaimer && (
+            <p className={styles.disclaimer}>{project.disclaimer}</p>
+          )}
         </div>
 
         <div className={styles.action}>

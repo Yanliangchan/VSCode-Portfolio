@@ -32,6 +32,15 @@ export const projects: Project[] = [
     tier: 'work',
   },
   {
+    title: 'Project-Eidolon',
+    description:
+      'A personal knowledge-management "second brain" that fine-tunes an AI model on my own notes, so it can draft emails and notes that already read in my voice.',
+    logo: '/logos/eidolon.svg',
+    link: 'https://eidolon.yanliangchan.com/',
+    slug: 'project-eidolon',
+    tier: 'work',
+  },
+  {
     title: 'Enlisted',
     description:
       'A first-person shooter that recreates Singapore Army National Service training scenarios and equipment — a fan-made project built purely for fun.',

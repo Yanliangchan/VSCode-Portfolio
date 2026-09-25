@@ -195,6 +195,142 @@
   --terminal-border: #262a39;
 }
 
+/* Dark Modern — VS Code's current out-of-the-box default theme, verified
+   against microsoft/vscode's extensions/theme-defaults/themes/dark_modern.json. */
+[data-theme='dark-modern'] {
+  --main-bg: #1f1f1f;
+  --bg-text: #1a1a1a;
+  --text-color: #cccccc;
+  --accent-color: #4daafc;
+  --accent-color-rgb: 77, 170, 252;
+  --chrome-bg: #181818;
+  --rail-bg: #181818;
+  --rail-hover-bg: #2a2a2a;
+  --tree-bg: #181818;
+  --tree-hover-bg: #2a2a2a;
+  --tree-border: #2b2b2b;
+  --tabstrip-bg: #181818;
+  --tabstrip-item-bg: #181818;
+  --tabstrip-item-active-bg: #1f1f1f;
+  --tabstrip-item-border: #2b2b2b;
+  --statusline-bg: #181818;
+  --statusline-border: #2b2b2b;
+  --button-bg: #0078d4;
+  --button-text: #ffffff;
+  --statusline-hover-bg: #2a2a2a;
+  --scrollbar-track-bg: #1f1f1f;
+  --scrollbar-thumb-bg: #4d4d4d;
+  --article-bg: #232323;
+  --terminal-bg: #181818;
+  --terminal-header-bg: #181818;
+  --terminal-border: #2b2b2b;
+}
+
+/* Dark+ — VS Code's legacy default dark theme, verified against
+   microsoft/vscode's dark_plus.json/dark_vs.json plus the engine's
+   documented hardcoded UI defaults (dark_plus itself sets almost no
+   chrome colors, so most of this is what a stock install actually
+   renders: the recognizable lighter #3C3C3C title bar and the classic
+   #007ACC blue status bar). */
+[data-theme='dark-plus'] {
+  --main-bg: #1e1e1e;
+  --bg-text: #202020;
+  --text-color: #d4d4d4;
+  --accent-color: #3794ff;
+  --accent-color-rgb: 55, 148, 255;
+  --chrome-bg: #3c3c3c;
+  --rail-bg: #333333;
+  --rail-hover-bg: #2a2d2e;
+  --tree-bg: #252526;
+  --tree-hover-bg: #2a2d2e;
+  --tree-border: #3d3d3d;
+  --tabstrip-bg: #252526;
+  --tabstrip-item-bg: #2d2d2d;
+  --tabstrip-item-active-bg: #1e1e1e;
+  --tabstrip-item-border: #252526;
+  --statusline-bg: #007acc;
+  --statusline-border: transparent;
+  --button-bg: #0e639c;
+  --button-text: #ffffff;
+  --statusline-hover-bg: #1a8ad4;
+  --scrollbar-track-bg: #1e1e1e;
+  --scrollbar-thumb-bg: #46484a;
+  --article-bg: #252526;
+  --terminal-bg: #1e1e1e;
+  --terminal-header-bg: #252526;
+  --terminal-border: #3d3d3d;
+}
+
+/* Monokai — verified against microsoft/vscode's
+   extensions/theme-monokai/themes/monokai-color-theme.json. Accent uses
+   Monokai's real signature pink (#F92672, its keyword color) instead of
+   the theme's own muted UI focusBorder (#99947c) — same reasoning as
+   the Dracula/Night Owl entries above: the pink is what people actually
+   recognize as "Monokai." */
+[data-theme='monokai'] {
+  --main-bg: #272822;
+  --bg-text: #232420;
+  --text-color: #f8f8f2;
+  --accent-color: #f92672;
+  --accent-color-rgb: 249, 38, 114;
+  --chrome-bg: #1e1f1c;
+  --rail-bg: #272822;
+  --rail-hover-bg: #34352f;
+  --tree-bg: #1e1f1c;
+  --tree-hover-bg: #272822;
+  --tree-border: #414339;
+  --tabstrip-bg: #1e1f1c;
+  --tabstrip-item-bg: #34352f;
+  --tabstrip-item-active-bg: #272822;
+  --tabstrip-item-border: #1e1f1c;
+  --statusline-bg: #414339;
+  --statusline-border: transparent;
+  --button-bg: #75715e;
+  --button-text: #f8f8f2;
+  --statusline-hover-bg: #4f4f52;
+  --scrollbar-track-bg: #272822;
+  --scrollbar-thumb-bg: #454647;
+  --article-bg: #2e2f28;
+  --terminal-bg: #272822;
+  --terminal-header-bg: #1e1f1c;
+  --terminal-border: #414339;
+}
+
+/* Solarized Dark — verified against microsoft/vscode's
+   extensions/theme-solarized-dark/themes/solarized-dark-color-theme.json.
+   Text color and borders use Solarized's own documented palette
+   constants (base1 / base02) where the theme file didn't set an exact
+   UI key, since those are the values the spec itself defines for that
+   role. */
+[data-theme='solarized-dark'] {
+  --main-bg: #002b36;
+  --bg-text: #012730;
+  --text-color: #93a1a1;
+  --accent-color: #2aa198;
+  --accent-color-rgb: 42, 161, 152;
+  --chrome-bg: #002c39;
+  --rail-bg: #003847;
+  --rail-hover-bg: #004052;
+  --tree-bg: #00212b;
+  --tree-hover-bg: #002b36;
+  --tree-border: #073642;
+  --tabstrip-bg: #00212b;
+  --tabstrip-item-bg: #004052;
+  --tabstrip-item-active-bg: #002b37;
+  --tabstrip-item-border: #003847;
+  --statusline-bg: #00212b;
+  --statusline-border: transparent;
+  --button-bg: #2aa198;
+  --button-text: #002b36;
+  --statusline-hover-bg: #073642;
+  --scrollbar-track-bg: #002b36;
+  --scrollbar-thumb-bg: #073642;
+  --article-bg: #00252f;
+  --terminal-bg: #00212b;
+  --terminal-header-bg: #00212b;
+  --terminal-border: #003847;
+}
+
 /* Hacker Green — hidden theme, not listed in Settings/Command Palette */
 [data-theme='hacker-green'] {
   --main-bg: #000000;

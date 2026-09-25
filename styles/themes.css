@@ -1,20 +1,20 @@
-/* GitHub Dark */
+/* GitHub Dark (Classic) — verified against primer/github-vscode-theme-dark-classic's themes/dark.json */
 :root {
   --main-bg: #24292e;
   --bg-text: rgba(56, 58, 61, 0.35);
   --text-color: #efefef;
-  --accent-color: #58a6ff;
-  --accent-color-rgb: 88, 166, 255;
-  --chrome-bg: #1f2428;
+  --accent-color: #79b8ff;
+  --accent-color-rgb: 121, 184, 255;
+  --chrome-bg: #24292e;
   --rail-bg: #24292e;
   --rail-hover-bg: #1f2428;
   --tree-bg: #1f2428;
   --tree-hover-bg: #24292e;
-  --tree-border: #161a1d;
+  --tree-border: #1b1f23;
   --tabstrip-bg: #1f2428;
   --tabstrip-item-bg: #1f2428;
   --tabstrip-item-active-bg: #24292e;
-  --tabstrip-item-border: #24292e;
+  --tabstrip-item-border: #1b1f23;
   --statusline-bg: #24292e;
   --statusline-border: #1b1f23;
   --button-bg: #176f2c;
@@ -28,14 +28,18 @@
   --terminal-border: #1b1f23;
 }
 
-/* Dracula */
+/* Dracula — verified against dracula/visual-studio-code's src/dracula.yml.
+   Accent kept as Dracula's signature purple (#bd93f9) rather than the
+   real theme's muted focusBorder (#6272a4) — the purple is what's
+   actually recognizable as "Dracula" and is one of the theme's own
+   documented brand colors. */
 [data-theme='dracula'] {
   --main-bg: #282a36;
   --bg-text: #313340;
   --text-color: #efefef;
   --accent-color: #bd93f9;
   --accent-color-rgb: 189, 147, 249;
-  --chrome-bg: #1e1f29;
+  --chrome-bg: #21222c;
   --rail-bg: #343746;
   --rail-hover-bg: #3c3d51;
   --tree-bg: #21222c;
@@ -58,87 +62,94 @@
   --terminal-border: #191a21;
 }
 
-/* Ayu Dark */
+/* Ayu Dark — verified against ayu-theme/vscode-ayu's ayu-dark.json. The
+   editor pane (--main-bg / active tab) is a distinct, slightly lighter
+   shade than the surrounding chrome (rail/tree/tabstrip/statusline),
+   matching the real theme's own panel-vs-editor contrast. */
 [data-theme='ayu-dark'] {
-  --main-bg: #0a0e14;
+  --main-bg: #10141c;
   --bg-text: #101620;
   --text-color: #efefef;
   --accent-color: #e6b450;
   --accent-color-rgb: 230, 180, 80;
-  --chrome-bg: #1f2428;
-  --rail-bg: #0a0e14;
+  --chrome-bg: #0d1017;
+  --rail-bg: #0d1017;
   --rail-hover-bg: #00010a;
-  --tree-bg: #0a0e14;
+  --tree-bg: #0d1017;
   --tree-hover-bg: #00010a;
-  --tree-border: transparent;
-  --tabstrip-bg: #0a0e14;
-  --tabstrip-item-bg: #0a0e14;
-  --tabstrip-item-active-bg: #0a0e14;
-  --tabstrip-item-border: transparent;
-  --statusline-bg: #0a0e14;
-  --statusline-border: transparent;
+  --tree-border: #1b1f29;
+  --tabstrip-bg: #0d1017;
+  --tabstrip-item-bg: #0d1017;
+  --tabstrip-item-active-bg: #10141c;
+  --tabstrip-item-border: #1b1f29;
+  --statusline-bg: #0d1017;
+  --statusline-border: #1b1f29;
   --button-bg: #e6b450;
-  --button-text: #0a0e14;
+  --button-text: #765b24;
   --statusline-hover-bg: #4f4f52;
-  --scrollbar-track-bg: #0a0e14;
+  --scrollbar-track-bg: #0d1017;
   --scrollbar-thumb-bg: #454647;
   --article-bg: #10121a;
-  --terminal-bg: #0a0e14;
-  --terminal-header-bg: #0a0e14;
-  --terminal-border: transparent;
+  --terminal-bg: #0d1017;
+  --terminal-header-bg: #0d1017;
+  --terminal-border: #1b1f29;
 }
 
-/* Ayu Mirage */
+/* Ayu Mirage — verified against ayu-theme/vscode-ayu's ayu-mirage.json.
+   Same editor-vs-chrome contrast as Ayu Dark: the editor pane and active
+   tab (#242936) sit a shade lighter than the surrounding chrome
+   (#1f2430). */
 [data-theme='ayu-mirage'] {
-  --main-bg: #1f2430;
+  --main-bg: #242936;
   --bg-text: #21242b;
   --text-color: #efefef;
   --accent-color: #ffcc66;
   --accent-color-rgb: 255, 204, 102;
-  --chrome-bg: #1f2428;
+  --chrome-bg: #1f2430;
   --rail-bg: #1f2430;
   --rail-hover-bg: #191e2a;
   --tree-bg: #1f2430;
   --tree-hover-bg: #191e2a;
-  --tree-border: transparent;
+  --tree-border: #171b24;
   --tabstrip-bg: #1f2430;
   --tabstrip-item-bg: #1f2430;
-  --tabstrip-item-active-bg: #1f2430;
-  --tabstrip-item-border: transparent;
+  --tabstrip-item-active-bg: #242936;
+  --tabstrip-item-border: #171b24;
   --statusline-bg: #1f2430;
-  --statusline-border: transparent;
+  --statusline-border: #171b24;
   --button-bg: #ffcc66;
-  --button-text: #1f2430;
+  --button-text: #735923;
   --statusline-hover-bg: #4f4f52;
   --scrollbar-track-bg: #1f2430;
   --scrollbar-thumb-bg: #454647;
   --article-bg: #252e3d;
   --terminal-bg: #1f2430;
   --terminal-header-bg: #1f2430;
-  --terminal-border: transparent;
+  --terminal-border: #171b24;
 }
 
-/* Nord */
+/* Nord — verified against nordtheme/visual-studio-code's
+   nord-color-theme.json. */
 [data-theme='nord'] {
   --main-bg: #2e3440;
   --bg-text: #3b414d;
   --text-color: #efefef;
   --accent-color: #88c0d0;
   --accent-color-rgb: 136, 192, 208;
-  --chrome-bg: #1f2428;
+  --chrome-bg: #2e3440;
   --rail-bg: #2e3440;
   --rail-hover-bg: #434c5e;
   --tree-bg: #2e3440;
   --tree-hover-bg: #434c5e;
-  --tree-border: rgba(136, 192, 208, 0.2);
+  --tree-border: #3b4252;
   --tabstrip-bg: #2e3440;
   --tabstrip-item-bg: #2e3440;
   --tabstrip-item-active-bg: #3b4252;
   --tabstrip-item-border: transparent;
   --statusline-bg: #3b4252;
   --statusline-border: transparent;
-  --button-bg: #434c5e;
-  --button-text: #d8dee9;
+  --button-bg: #88c0d0;
+  --button-text: #2e3440;
   --statusline-hover-bg: #4f4f52;
   --scrollbar-track-bg: #2e3440;
   --scrollbar-thumb-bg: #454647;
@@ -148,13 +159,19 @@
   --terminal-border: transparent;
 }
 
-/* Night Owl */
+/* Night Owl — verified against sdras/night-owl-vscode-theme's
+   "Night Owl-color-theme.json". Accent uses the theme's real syntax
+   blue (#82aaff, used for keywords/functions — the color most
+   screenshots of Night Owl are actually recognized by) rather than its
+   UI focusBorder (#122d42), which is far too close to the background to
+   work as a usable link/hover color in this site's chrome. Button color
+   is the theme's real (translucent) purple. */
 [data-theme='night-owl'] {
   --main-bg: #011627;
   --bg-text: #031d33;
   --text-color: #d6deeb;
-  --accent-color: rgb(95, 126, 151);
-  --accent-color-rgb: 95, 126, 151;
+  --accent-color: #82aaff;
+  --accent-color-rgb: 130, 170, 255;
   --chrome-bg: #011627;
   --rail-bg: #011627;
   --rail-hover-bg: #0e293f;
@@ -167,7 +184,7 @@
   --tabstrip-item-border: rgb(39, 43, 59);
   --statusline-bg: #011627;
   --statusline-border: #262a39;
-  --button-bg: rgb(95, 126, 151);
+  --button-bg: #7e57c2;
   --button-text: #fff;
   --statusline-hover-bg: #1b222f;
   --scrollbar-track-bg: #011627;

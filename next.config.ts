@@ -2,6 +2,12 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Traces only the production dependencies each route actually needs into
+  // .next/standalone, instead of running `next start` against the full
+  // node_modules tree (777MB here, most of it build-time-only tooling).
+  // Cuts both the resident memory of the running server process and how
+  // much has to be paged in from disk on a small Railway container.
+  output: 'standalone',
   images: {
     remotePatterns: [
       { hostname: 'avatars.githubusercontent.com', protocol: 'https' },

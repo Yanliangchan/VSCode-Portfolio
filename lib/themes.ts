@@ -42,6 +42,30 @@ export const THEMES: ThemeInfo[] = [
     icon: '/themes/night-owl.png',
     publisher: 'sarah.drasner',
   },
+  {
+    name: 'Dark Modern',
+    theme: 'dark-modern',
+    icon: '/logos/vscode_icon.svg',
+    publisher: 'Microsoft',
+  },
+  {
+    name: 'Dark+',
+    theme: 'dark-plus',
+    icon: '/logos/vscode_icon.svg',
+    publisher: 'Microsoft',
+  },
+  {
+    name: 'Monokai',
+    theme: 'monokai',
+    icon: '/logos/vscode_icon.svg',
+    publisher: 'Microsoft',
+  },
+  {
+    name: 'Solarized Dark',
+    theme: 'solarized-dark',
+    icon: '/logos/vscode_icon.svg',
+    publisher: 'Microsoft',
+  },
 ];
 
 export const THEME_KEYS = THEMES.map(t => t.theme) as [string, ...string[]];

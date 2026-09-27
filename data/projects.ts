@@ -32,6 +32,15 @@ export const projects: Project[] = [
     tier: 'work',
   },
   {
+    title: 'Unmask',
+    description:
+      'A self-hosted OSINT orchestration platform that runs open-source intelligence tools as audited, case-gated investigations — pivot chains, correlation scoring, and time-aware diffing across scans.',
+    logo: '/logos/unmask.svg',
+    link: 'https://code.yanliangchan.com/',
+    slug: 'unmask',
+    tier: 'work',
+  },
+  {
     title: 'Project-Eidolon',
     description:
       'A personal knowledge-management "second brain" that fine-tunes an AI model on my own notes, so it can draft emails and notes that already read in my voice.',

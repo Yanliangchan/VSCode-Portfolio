@@ -36,7 +36,7 @@ export const projects: Project[] = [
     description:
       'A self-hosted OSINT orchestration platform that runs open-source intelligence tools as audited, case-gated investigations — pivot chains, correlation scoring, and time-aware diffing across scans.',
     logo: '/logos/unmask.svg',
-    link: 'https://code.yanliangchan.com/',
+    link: 'https://unmask.yanliangchan.com/',
     slug: 'unmask',
     tier: 'work',
   },

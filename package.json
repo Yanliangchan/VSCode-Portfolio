@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "postbuild": "cp -r public .next/standalone/public && cp -r .next/static .next/standalone/.next/static",
+    "start": "PORT=8080 HOSTNAME=0.0.0.0 NODE_OPTIONS='--max-old-space-size=64 --expose-gc' node scripts/start-standalone.js",
     "lint": "next lint",
     "audit": "bun audit"
   },

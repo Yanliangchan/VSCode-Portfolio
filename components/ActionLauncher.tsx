@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { VscSymbolColor, VscTerminal, VscFiles, VscGoToFile, VscGear, VscColorMode, VscHome, VscAccount, VscCode, VscPulse, VscMail, VscGithubAlt, VscScreenFull, VscExtensions, VscSourceControl, VscSplitHorizontal } from 'react-icons/vsc';
+import { VscSymbolColor, VscTerminal, VscGoToFile, VscGear, VscColorMode, VscHome, VscAccount, VscCode, VscPulse, VscMail, VscGithubAlt, VscScreenFull, VscExtensions, VscSourceControl, VscSplitHorizontal } from 'react-icons/vsc';
 import { MdNavigateNext } from 'react-icons/md';
 
 import { THEMES } from '@/lib/themes';
@@ -41,6 +41,15 @@ const ActionLauncher = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [showThemePicker, setShowThemePicker] = useState(false);
+
+  // Reset the selection synchronously during render when the filtered list
+  // changes, rather than in an effect — see GoToFile's identical pattern.
+  const [prevFilterKey, setPrevFilterKey] = useState(`${searchQuery}|${showThemePicker}`);
+  const filterKey = `${searchQuery}|${showThemePicker}`;
+  if (filterKey !== prevFilterKey) {
+    setPrevFilterKey(filterKey);
+    setSelectedIndex(0);
+  }
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -234,10 +243,6 @@ const ActionLauncher = ({
   }, [isOpen]);
 
   useEffect(() => {
-    setSelectedIndex(0);
-  }, [searchQuery, showThemePicker]);
-
-  useEffect(() => {
     if (listRef.current && selectedIndex >= 0) {
       const selectedElement = listRef.current.children[selectedIndex] as HTMLElement;
       if (selectedElement) {
@@ -309,7 +314,7 @@ const ActionLauncher = ({
             (() => {
               let lastCategory = '';
               let itemIndex = 0;
-              return filteredCommands.map((cmd, index) => {
+              return filteredCommands.map((cmd) => {
                 const showCategory = cmd.category !== lastCategory;
                 lastCategory = cmd.category;
                 const currentIndex = itemIndex++;

@@ -34,6 +34,10 @@ const StatusLine = ({ onTerminalToggle, isTerminalOpen }: StatusLineProps) => {
   const [line, setLine] = useState(1);
 
   useEffect(() => {
+    // Reset tied to the scroll-listener (re)subscription below, not a
+    // standalone derived-state reset — this effect's whole job is
+    // resyncing `line` to the new route's #main-editor.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLine(1);
     const main = document.getElementById('main-editor');
     if (!main) return;

@@ -96,6 +96,11 @@ const FindBar = ({ isOpen, onClose }: FindBarProps) => {
       inputRef.current?.focus();
       inputRef.current?.select();
     } else {
+      // Tied to clearHighlights() below (an imperative call into the
+      // browser's CSS.highlights registry, an external system) — this whole
+      // effect is about synchronizing that registry and input focus with
+      // `isOpen`, not a standalone derived-state reset.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setQuery('');
       setMatches([]);
       setActiveIndex(0);
@@ -108,6 +113,9 @@ const FindBar = ({ isOpen, onClose }: FindBarProps) => {
     const root = document.getElementById('main-editor');
     if (!root) return;
 
+    // collectMatches walks live DOM text nodes — needs the committed DOM,
+    // so it can't move to render.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMatches(collectMatches(root, query, caseSensitive));
     setActiveIndex(0);
   }, [isOpen, query, caseSensitive]);

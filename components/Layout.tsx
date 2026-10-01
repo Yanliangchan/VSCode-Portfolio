@@ -104,7 +104,11 @@ const Layout = ({ children }: LayoutProps) => {
     }
 
     // Matches are page-specific — don't carry stale highlights/results
-    // over to whatever page is navigated to next.
+    // over to whatever page is navigated to next. Tied to the DOM scroll
+    // sync above (same effect, same [pathname] trigger), not a standalone
+    // derived-state reset, so it stays in this effect rather than moving to
+    // render.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsFindBarOpen(false);
   }, [pathname]);
 

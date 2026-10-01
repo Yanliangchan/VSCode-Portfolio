@@ -23,6 +23,15 @@ const nextConfig: NextConfig = {
     ],
   },
   async headers() {
+    // Note: a Cache-Control rule for /logos/* and /themes/* (public/ assets
+    // keep literal, non-hashed filenames, so they default to effectively
+    // uncached — max-age=0) was tried here and removed: Next's standalone
+    // static-file server forces its own Cache-Control for public/ assets
+    // regardless of what headers() returns for that key, while every other
+    // header on the same rule does apply. ETag/Last-Modified are already
+    // present on those responses, so repeat visits still cost a cheap
+    // conditional request (304, no body) rather than a full re-download —
+    // just not a zero-request one. Total asset weight is ~230KB.
     return [
       {
         source: '/:path*',

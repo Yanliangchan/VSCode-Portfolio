@@ -82,6 +82,7 @@ const AboutPage = () => {
             {/* About Me */}
             <section className={`${styles.section} ${styles.reveal}`} data-reveal>
               <div className={styles.sectionHeader}>
+                {/* eslint-disable-next-line react/jsx-no-comment-textnodes -- intentional literal text styled as a code comment, not a stray JSX comment */}
                 <span className={styles.sectionNumber}>// 01</span>
                 <h2 className={styles.sectionTitle}>About Me</h2>
               </div>
@@ -106,6 +107,7 @@ const AboutPage = () => {
             {/* Experience */}
             <section id="experience" className={`${styles.section} ${styles.reveal}`} data-reveal>
               <div className={styles.sectionHeader}>
+                {/* eslint-disable-next-line react/jsx-no-comment-textnodes -- intentional literal text styled as a code comment, not a stray JSX comment */}
                 <span className={styles.sectionNumber}>// 02</span>
                 <h2 className={styles.sectionTitle}>Experience</h2>
               </div>
@@ -186,6 +188,7 @@ const AboutPage = () => {
             {/* Education */}
             <section id="education" className={`${styles.section} ${styles.reveal}`} data-reveal>
               <div className={styles.sectionHeader}>
+                {/* eslint-disable-next-line react/jsx-no-comment-textnodes -- intentional literal text styled as a code comment, not a stray JSX comment */}
                 <span className={styles.sectionNumber}>// 03</span>
                 <h2 className={styles.sectionTitle}>Education</h2>
               </div>
@@ -232,6 +235,7 @@ const AboutPage = () => {
             {/* Selected Projects */}
             <section className={`${styles.section} ${styles.reveal}`} data-reveal>
               <div className={styles.sectionHeader}>
+                {/* eslint-disable-next-line react/jsx-no-comment-textnodes -- intentional literal text styled as a code comment, not a stray JSX comment */}
                 <span className={styles.sectionNumber}>// 04</span>
                 <h2 className={styles.sectionTitle}>Selected Projects</h2>
               </div>

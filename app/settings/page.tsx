@@ -56,7 +56,10 @@ const SettingsPage = () => {
     useSettings();
 
   useEffect(() => {
+    // One-time hydration from localStorage — see SettingsContext's identical
+    // pattern for why this can't move to render without a hydration mismatch.
     const savedTheme = localStorage.getItem('theme') || 'github-dark';
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveTheme(savedTheme);
     setIsLoaded(true);
   }, []);

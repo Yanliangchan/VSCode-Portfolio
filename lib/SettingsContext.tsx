@@ -27,7 +27,13 @@ export const SettingsProvider = ({ children }: { children: React.ReactNode }) =>
   // already applied them to the DOM before paint, this just syncs React
   // state to match so later toggles read/write from the same source.
   useEffect(() => {
+    // One-time hydration from localStorage, intentionally deferred to an
+    // effect: reading it during render would mismatch the server-rendered
+    // default and break hydration (same reasoning as app/layout.tsx's
+    // inline themeScript, which applies to the DOM pre-paint but can't
+    // reach React state directly).
     const storedMinimap = localStorage.getItem('settings.minimapEnabled');
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (storedMinimap !== null) setMinimapEnabledState(storedMinimap === 'true');
 
     const storedFontSize = localStorage.getItem('settings.fontSize');

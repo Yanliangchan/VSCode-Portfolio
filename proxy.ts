@@ -38,8 +38,33 @@ function isRateLimited(ip: string): boolean {
 // This is Next.js's documented CSP pattern; it necessarily opts every
 // page into dynamic rendering (no static prerendering is possible while
 // a per-request nonce is in play).
+// Every route here is a read-only page — no forms, no API routes, nothing
+// that acts on anything but GET/HEAD. Rejecting other methods up front
+// closes off a surface that has no legitimate use (Next's default page
+// rendering otherwise responds to POST/PUT/DELETE/etc. identically to GET).
+// OPTIONS is deliberately excluded too: Next's router already 400s it on
+// page routes with no handler of its own, so rejecting it here as well
+// just makes that an explicit, consistent 405 instead of leaking a
+// slightly confusing 400 from deeper in the framework.
+const ALLOWED_METHODS = new Set(['GET', 'HEAD']);
+
 export function proxy(request: NextRequest) {
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0].trim() ?? 'unknown';
+  if (!ALLOWED_METHODS.has(request.method)) {
+    return new NextResponse('Method Not Allowed', {
+      status: 405,
+      headers: { Allow: 'GET, HEAD' },
+    });
+  }
+
+  // Railway sits in front of this app as the one trusted reverse proxy, and
+  // (like any standard proxy chain) appends the IP it actually observed
+  // rather than replacing the header outright — so the LAST entry is
+  // Railway's own observation, while the FIRST is whatever the client sent
+  // and can freely forge. Rate-limiting on the first entry let any visitor
+  // bypass the limit entirely by sending a different fake value per
+  // request; trusting only the one hop adjacent to us closes that.
+  const forwardedFor = request.headers.get('x-forwarded-for');
+  const ip = forwardedFor?.split(',').at(-1)?.trim() || 'unknown';
   if (isRateLimited(ip)) {
     return new NextResponse('Too Many Requests', { status: 429 });
   }

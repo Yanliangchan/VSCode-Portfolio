@@ -1,15 +1,23 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
+import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
+import nextTypescript from 'eslint-config-next/typescript';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
+// Native flat configs (no FlatCompat) — the compat bridge was needed only
+// for the pre-16 `extends: ['next/core-web-vitals', ...]` string form, and
+// broke under ESLint 9.39 with a circular-JSON error inside
+// @eslint/eslintrc's config validator when formatting eslint-plugin-react's
+// newer flat `configs` object.
 const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...nextCoreWebVitals,
+  ...nextTypescript,
+  {
+    // Plain Node entrypoint run directly by `node`, outside Next's
+    // bundler/TS pipeline — CommonJS require() is the correct, simplest
+    // choice here, not a stray import style to flag.
+    files: ['scripts/**/*.js'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
 ];
+
 export default eslintConfig;

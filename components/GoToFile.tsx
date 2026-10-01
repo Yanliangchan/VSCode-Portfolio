@@ -25,6 +25,16 @@ const GoToFile = ({ isOpen, onClose, mode = 'navigate', onSplitSelect }: GoToFil
 
   const filtered = fuzzyFilter(fileTreeItems, query, (item) => item.name);
 
+  // Reset the selection synchronously during render when the query changes,
+  // rather than in an effect — avoids an extra render pass and the
+  // cascading-render footgun effects have for pure "adjust state to match a
+  // prop" resets (see https://react.dev/learn/you-might-not-need-an-effect).
+  const [prevQuery, setPrevQuery] = useState(query);
+  if (query !== prevQuery) {
+    setPrevQuery(query);
+    setSelectedIndex(0);
+  }
+
   const handleSelect = useCallback(
     (index: number) => {
       if (index < filtered.length) {
@@ -74,10 +84,6 @@ const GoToFile = ({ isOpen, onClose, mode = 'navigate', onSplitSelect }: GoToFil
       setSelectedIndex(0);
     }
   }, [isOpen]);
-
-  useEffect(() => {
-    setSelectedIndex(0);
-  }, [query]);
 
   useEffect(() => {
     if (listRef.current && selectedIndex >= 0) {

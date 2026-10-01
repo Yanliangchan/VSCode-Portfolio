@@ -1,11 +1,35 @@
-<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M13 11L6 18L13 25" stroke="url(#paint0_linear_codeproof)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M23 11L30 18L23 25" stroke="url(#paint0_linear_codeproof)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M16 27L20 9" stroke="url(#paint0_linear_codeproof)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <defs>
-<linearGradient id="paint0_linear_codeproof" x1="6" y1="9" x2="30" y2="27" gradientUnits="userSpaceOnUse">
-<stop stop-color="#34D399"/>
-<stop offset="1" stop-color="#059669"/>
+<linearGradient id="cp-logo-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+<stop offset="0" stop-color="#5b9cff" />
+<stop offset="1" stop-color="#2f6fe0" />
 </linearGradient>
 </defs>
+<rect width="32" height="32" rx="8" fill="url(#cp-logo-grad)" />
+<path
+  d="M12 10.5 8 16l4 5.5"
+  stroke="#eaf1ff"
+  stroke-width="2.1"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  fill="none"
+  opacity="0.55"
+/>
+<path
+  d="M20 10.5 24 16l-4 5.5"
+  stroke="#eaf1ff"
+  stroke-width="2.1"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  fill="none"
+  opacity="0.55"
+/>
+<path
+  d="M12.5 16.5 15 19l5-7"
+  stroke="#ffffff"
+  stroke-width="2.6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  fill="none"
+/>
 </svg>

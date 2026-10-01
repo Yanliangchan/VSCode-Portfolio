@@ -1,8 +1,5 @@
 import { Project } from '@/types';
 
-const SAF_DISCLAIMER =
-  'Built for fun, set during Singapore’s National Service. All SAF unit and equipment details are drawn from public sources (Wikipedia’s "Singapore Army" and "List of equipment of the Singapore Army" articles) — not affiliated with or endorsed by MINDEF or the SAF.';
-
 export const projects: Project[] = [
   {
     title: 'Synapse',
@@ -48,25 +45,5 @@ export const projects: Project[] = [
     link: 'https://eidolon.yanliangchan.com/',
     slug: 'project-eidolon',
     tier: 'work',
-  },
-  {
-    title: 'Enlisted',
-    description:
-      'A first-person shooter that recreates Singapore Army National Service training scenarios and equipment — a fan-made project built purely for fun.',
-    logo: '/logos/enlisted.svg',
-    link: 'https://enlisted.yanliangchan.com/',
-    slug: 'enlisted',
-    tier: 'game',
-    disclaimer: SAF_DISCLAIMER,
-  },
-  {
-    title: 'Command',
-    description:
-      'A turn-based grand-strategy wargame where you command Singapore Army units and equipment across SAF-inspired scenarios — a fan-made project built purely for fun.',
-    logo: '/logos/command.svg',
-    link: 'https://command.yanliangchan.com/',
-    slug: 'command',
-    tier: 'game',
-    disclaimer: SAF_DISCLAIMER,
   },
 ];
